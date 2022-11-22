@@ -1,0 +1,30 @@
+.row {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 4rem;
+
+    &:hover {
+      cursor: pointer;
+      filter: brightness(1.5);
+    }
+  }
+}
+
+.borderBottom {
+  border-bottom: 1px solid #888;
+}
+
+.halfRow {
+  width: 50%;
+}
+
+.borderLeft {
+  border-left: 1px solid #888;
+}

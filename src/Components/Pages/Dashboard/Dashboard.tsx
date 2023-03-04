@@ -6,14 +6,16 @@ import "./styles.scss";
 const Dashboard: FC = () => {
   return (
     <Page>
-      <div className="row borderBottom">
-        <NavLink to="/add-word">Add Word</NavLink>
-      </div>
-      <div className="row halfRow">
-        <NavLink to="/get-to-know">Get To Know</NavLink>
-      </div>
-      <div className="row halfRow borderLeft">
-        <NavLink to="/exam">Exam</NavLink>
+      <div className="dashboard">
+        <div className="row borderBottom">
+          <NavLink to="/add-word">Add Word</NavLink>
+        </div>
+        <div className="row halfRow">
+          <NavLink to="/get-to-know">Get To Know</NavLink>
+        </div>
+        <div className="row halfRow borderLeft">
+          <NavLink to="/exam">Exam</NavLink>
+        </div>
       </div>
     </Page>
   );

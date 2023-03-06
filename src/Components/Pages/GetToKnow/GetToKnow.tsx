@@ -1,8 +1,12 @@
 import { FC } from "react";
 import { Page } from "../../Page";
 
-const GetToKnow: FC = () => {
-  return <Page>GetToKnow</Page>;
+interface GetToKnowProps {
+  title?: string;
+}
+
+const GetToKnow: FC<GetToKnowProps> = (props) => {
+  return <Page title={props.title}>GetToKnow</Page>;
 };
 
 export default GetToKnow;

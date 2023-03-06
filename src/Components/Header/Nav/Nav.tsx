@@ -21,7 +21,7 @@ const Nav: FC = () => {
             <ul>
               {routes.map((route) => {
                 return (
-                  <li>
+                  <li key={route.name}>
                     <NavLink
                       to={route.path}
                       onClick={() => setMenuActive(!menuActive)}

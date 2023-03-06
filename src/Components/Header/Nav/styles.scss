@@ -2,21 +2,21 @@
   width: 30px;
   height: 27px;
   cursor: pointer;
-}
 
-.burgerMenuButton div {
-  width: 30px;
-  height: 5px;
-  background-color: black;
-  margin: 6px 0;
-}
+  div {
+    width: 30px;
+    height: 5px;
+    background-color: black;
+    margin: 6px 0;
 
-.burgerMenuButton div:first-child {
-  margin-top: 0;
-}
+    &:first-child {
+      margin-top: 0;
+    }
 
-.burgerMenuButton div:last-child {
-  margin-bottom: 0;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
 nav {
@@ -27,14 +27,14 @@ nav {
   top: 8%;
   left: 0;
   padding: 1rem 0;
-}
 
-nav li {
-  list-style: none;
-}
+  li {
+    list-style: none;
+  }
 
-nav a {
-  text-decoration: none;
-  font-size: 2rem;
-  color: white;
+  a {
+    text-decoration: none;
+    font-size: 2rem;
+    color: white;
+  }
 }

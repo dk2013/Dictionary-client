@@ -1,10 +1,12 @@
-import React from 'react';
-import {Page} from "../../Page";
+import React, { FC } from "react";
+import { Page } from "../../Page";
 
-const Settings = () => {
-  return (
-    <Page>Settings</Page>
-  );
+interface SettingsProps {
+  title?: string;
+}
+
+const Settings: FC<SettingsProps> = (props) => {
+  return <Page title={props.title}>Settings</Page>;
 };
 
 export default Settings;

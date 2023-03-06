@@ -1,18 +1,18 @@
 export const routes = [
   {
-    path: '/',
-    name: 'Dashboard'
+    path: "/",
+    name: "Dashboard",
   },
   {
-    path: '/add-word',
-    name: 'Add Word'
+    path: "/add-word",
+    name: "Add Word",
   },
   {
-    path: '/get-to-know',
-    name: 'Get To Know'
+    path: "/get-to-know",
+    name: "Get To Know",
   },
   {
-    path: '/exam',
-    name: 'Exam'
+    path: "/exam",
+    name: "Exam",
   },
-]
+];

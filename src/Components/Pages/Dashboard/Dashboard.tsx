@@ -3,9 +3,13 @@ import { Page } from "../../Page";
 import { NavLink } from "react-router-dom";
 import "./styles.scss";
 
-const Dashboard: FC = () => {
+interface DashboardProps {
+  title?: string;
+}
+
+const Dashboard: FC<DashboardProps> = (props) => {
   return (
-    <Page>
+    <Page title={props.title}>
       <div className="dashboard">
         <div className="row borderBottom">
           <NavLink to="/add-word">Add Word</NavLink>

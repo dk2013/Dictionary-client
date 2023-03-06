@@ -1,9 +1,11 @@
-import React from 'react';
+import React from "react";
+import "./styles.scss";
+import { FaArrowRight } from "react-icons/fa";
 
 const LanguageSelector = () => {
   return (
-    <div>
-      From Eng to Rus
+    <div className="languageSelector">
+      Eng <FaArrowRight className="ico" /> Rus
     </div>
   );
 };

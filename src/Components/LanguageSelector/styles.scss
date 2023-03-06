@@ -1,0 +1,13 @@
+.languageSelector {
+  text-align: center;
+  padding: 1rem;
+}
+
+.ico {
+  display: inline;
+  cursor: pointer;
+
+  &:hover {
+    color: deepskyblue;
+  }
+}

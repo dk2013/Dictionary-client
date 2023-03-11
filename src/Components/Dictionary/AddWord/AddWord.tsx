@@ -6,6 +6,7 @@ import { NewWordInput } from "./NewWordInput";
 import { TranslationInput } from "./TranslationInput";
 import { SaveButton } from "../../Common/SaveButton";
 import { languageCodes } from "../Dictionary";
+import { getUpdatedDictionary } from "../utils";
 
 interface AddWordProps {
   title?: string;
@@ -22,11 +23,11 @@ type Word = {
   };
 };
 
-type Dictionary = {
+export type tDictionary = {
   [index in languageCodes]?: Word;
 };
 
-const dictionaryObj: Dictionary = {
+const dictionaryObj: tDictionary = {
   // ver 2
   ENG: {
     water: {
@@ -45,8 +46,6 @@ const dictionaryObj: Dictionary = {
     },
   },
 };
-
-
 
 // кохання - любовь - love
 // любов - любовь - love
@@ -92,7 +91,7 @@ dictionary: { // ver 2
  */
 
 const AddWord: FC<AddWordProps> = (props) => {
-  const [dictionary, setDictionary] = useState<Dictionary>(dictionaryObj);
+  const [dictionary, setDictionary] = useState<tDictionary>(dictionaryObj);
   const [newWord, setNewWord] = useState<string>("");
   const [translation, setTranslation] = useState<string>("");
   const [translateFrom, setTranslateFrom] = useState<languageCodes>(
@@ -121,46 +120,15 @@ const AddWord: FC<AddWordProps> = (props) => {
     console.log("save");
 
     setDictionary((prev) => {
-      if(prev[translateFrom]) {
-        if(prev[translateFrom]?.[newWord]) {
-          return {...prev,
-            [translateFrom]: {
-              ...prev[translateFrom],
-              [newWord] : {
-                ...prev[translateFrom]?.[newWord],
-                translation: {
-                  ...prev[translateFrom]?.[newWord].translation,
-                  [translateTo]: translation
-                }
-              }
-            }
-          }
-        } else {
-          return {...prev,
-            [translateFrom]: {
-              ...prev[translateFrom],
-              [newWord] : {
-                translation: {
-                  [translateTo]: translation
-                }
-              }
-            }
-          }
-        }
-      } else {
-        return {...prev,
-          [translateFrom]: {
-            [newWord] : {
-              translation: {
-                [translateTo]: translation
-              }
-            }
-          }
-        }
-      }
-    })
-
-    console.log(dictionary);
+      // Save direct and reverse translation
+      return getUpdatedDictionary(
+        prev,
+        newWord,
+        translation,
+        translateFrom,
+        translateTo
+      );
+    });
 
     props.onSaveTranslation();
   };
@@ -171,7 +139,6 @@ const AddWord: FC<AddWordProps> = (props) => {
 
       const newTranslateTo = translateFrom;
       const newTranslateFrom = translateTo;
-
       const translatedWord = getTranslationFromDictionary(
         translation,
         newTranslateFrom,
@@ -195,7 +162,11 @@ const AddWord: FC<AddWordProps> = (props) => {
   return (
     <Page title={props.title}>
       <PageHeader>Add Word</PageHeader>
-      <LanguageSelector translateFrom={translateFrom} translateTo={translateTo} onSwapLanguages={handleSwapLanguages} />
+      <LanguageSelector
+        translateFrom={translateFrom}
+        translateTo={translateTo}
+        onSwapLanguages={handleSwapLanguages}
+      />
       <NewWordInput
         value={newWord}
         onNewWordChange={(v: string) => handleNewWordChange(v)}

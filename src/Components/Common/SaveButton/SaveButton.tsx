@@ -4,12 +4,19 @@ import "./styles.scss";
 interface SaveButtonProps {
   children: ReactNode;
   onSave: () => void;
+  disabled?: boolean;
 }
 
-const SaveButton: FC<SaveButtonProps> = (props) => {
+const SaveButton: FC<SaveButtonProps> = ({
+  onSave,
+  children,
+  disabled = false,
+}) => {
   return (
     <div className="buttonContainer">
-      <button onClick={props.onSave}>{props.children}</button>
+      <button onClick={onSave} disabled={disabled}>
+        {children}
+      </button>
     </div>
   );
 };

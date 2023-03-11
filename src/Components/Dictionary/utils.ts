@@ -1,5 +1,5 @@
-import { tDictionary } from "./AddWord/AddWord";
-import { languageCodes } from "./Dictionary";
+import { tDictionary } from "../Common/Types/dictionary";
+import { languageCodes } from "../Common/Constants/dictionary";
 
 export const getUpdatedDictionary = (
   prevDictionary: tDictionary,
@@ -23,7 +23,7 @@ export const getUpdatedDictionary = (
     translation,
     newWord,
     translateTo,
-    translateFrom,
+    translateFrom
   );
 
   return prevDictionary;

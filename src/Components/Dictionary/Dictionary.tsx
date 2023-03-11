@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Dashboard } from "./Dashboard";
 import { AddWord } from "./AddWord";
@@ -14,6 +14,11 @@ import { getUpdatedDictionary } from "./utils";
 
 const Dictionary: FC = () => {
   const [dictionary, setDictionary] = useState<tDictionary>(dictionaryObj);
+
+  useEffect(() => {
+    // Restore a Dictionary object from the Local Storage
+    setDictionary(JSON.parse(localStorage.getItem("dictionary") || '""') || dictionaryObj);
+  }, []);
 
   const handleSaveTranslation = (
     newWord: string,

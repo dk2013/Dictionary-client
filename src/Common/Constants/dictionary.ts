@@ -14,7 +14,7 @@ export const dictionaryObj: tDictionary = {
     water: {
       translation: {
         RUS: "вода",
-        SPA: "aqua",
+        SPA: "agua",
       },
     },
   },
@@ -22,7 +22,7 @@ export const dictionaryObj: tDictionary = {
     вода: {
       translation: {
         ENG: "water",
-        SPA: "aqua",
+        SPA: "agua",
       },
     },
   },
@@ -52,7 +52,7 @@ dictionary: { // ver 2
       // word: "water", // = key
       translation: {
         rus: "вода",
-        esp: "aqua"
+        esp: "agua"
       }
     }
   },
@@ -61,7 +61,7 @@ dictionary: { // ver 2
       // word: "вода", // = key
       translation: {
         eng: "water",
-        esp: "aqua"
+        esp: "agua"
       }
     }
   }

@@ -2,8 +2,9 @@ import React, { FC } from "react";
 import "./styles.scss";
 
 interface NewWordInputProps {
-  onNewWordChange: (e: string) => void;
   value: string;
+  onNewWordChange: (e: string) => void;
+  onKeyDown: (key: string) => void;
 }
 
 const NewWordInput: FC<NewWordInputProps> = (props) => {
@@ -13,6 +14,7 @@ const NewWordInput: FC<NewWordInputProps> = (props) => {
         className="input"
         value={props.value}
         onChange={(e) => props.onNewWordChange(e.target.value)}
+        onKeyDown={(e) => props.onKeyDown(e.key)}
       />
     </div>
   );

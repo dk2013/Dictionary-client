@@ -2,8 +2,9 @@ import React, { FC } from "react";
 import "./styles.scss";
 
 interface TranslationProps {
-  onTranslationChange: (e: string) => void;
   value: string;
+  onTranslationChange: (e: string) => void;
+  onKeyDown: (key: string) => void;
 }
 
 const TranslationInput: FC<TranslationProps> = (props) => {
@@ -13,6 +14,7 @@ const TranslationInput: FC<TranslationProps> = (props) => {
         className="input"
         value={props.value}
         onChange={(e) => props.onTranslationChange(e.target.value)}
+        onKeyDown={(e) => props.onKeyDown(e.key)}
       />
     </div>
   );

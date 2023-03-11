@@ -4,21 +4,22 @@ import { LanguageSelector } from "./LanguageSelector";
 import { PageHeader } from "../../Page/PageHeader";
 import { NewWordInput } from "./NewWordInput";
 import { TranslationInput } from "./TranslationInput";
-import { SaveButton } from "../../Common/SaveButton";
-import { getUpdatedDictionary } from "../utils";
-import { tDictionary } from "../../Common/Types/dictionary";
-import {
-  dictionaryObj,
-  languageCodes,
-} from "../../Common/Constants/dictionary";
+import { SaveButton } from "../../../Common/Components/SaveButton";
+import { languageCodes } from "../../../Common/Constants/dictionary";
+import { tDictionary } from "../../../Common/Types/dictionary";
 
 interface AddWordProps {
   title?: string;
-  onSaveTranslation: () => void;
+  dictionary: tDictionary;
+  onSaveTranslation: (
+    newWord: string,
+    translation: string,
+    translateFrom: languageCodes,
+    translateTo: languageCodes
+  ) => void;
 }
 
 const AddWord: FC<AddWordProps> = (props) => {
-  const [dictionary, setDictionary] = useState<tDictionary>(dictionaryObj);
   const [newWord, setNewWord] = useState<string>("");
   const [translation, setTranslation] = useState<string>("");
   const [translateFrom, setTranslateFrom] = useState<languageCodes>(
@@ -43,21 +44,14 @@ const AddWord: FC<AddWordProps> = (props) => {
     setTranslation(v);
   };
 
+  const handleKeyDown = (key: string) => {
+    if (key === "Enter") {
+      handleSave();
+    }
+  };
+
   const handleSave = () => {
-    console.log("save");
-
-    setDictionary((prev) => {
-      // Save direct and reverse translation
-      return getUpdatedDictionary(
-        prev,
-        newWord,
-        translation,
-        translateFrom,
-        translateTo
-      );
-    });
-
-    props.onSaveTranslation();
+    props.onSaveTranslation(newWord, translation, translateFrom, translateTo);
   };
 
   const handleSwapLanguages = () => {
@@ -83,7 +77,7 @@ const AddWord: FC<AddWordProps> = (props) => {
     translateFrom: languageCodes,
     translateTo: languageCodes
   ) => {
-    return dictionary[translateFrom]?.[word]?.translation?.[translateTo];
+    return props.dictionary[translateFrom]?.[word]?.translation?.[translateTo];
   };
 
   return (
@@ -97,15 +91,19 @@ const AddWord: FC<AddWordProps> = (props) => {
       <NewWordInput
         value={newWord}
         onNewWordChange={(v: string) => handleNewWordChange(v)}
+        onKeyDown={handleKeyDown}
       />
       <TranslationInput
         value={translation}
         onTranslationChange={(v: string) => handleTranslationChange(v)}
+        onKeyDown={handleKeyDown}
       />
       <SaveButton onSave={handleSave} disabled={!newWord || !translation}>
         Save translation
       </SaveButton>
-      <button onClick={() => console.log(dictionary)}>show dictionary</button>
+      <button onClick={() => console.log(props.dictionary)}>
+        show dictionary
+      </button>
     </Page>
   );
 };

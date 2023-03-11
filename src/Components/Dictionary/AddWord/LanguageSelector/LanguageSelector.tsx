@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import "./styles.scss";
 import { FaArrowRight } from "react-icons/fa";
-import { languageCodes } from "../../../Common/Constants/dictionary";
+import { languageCodes } from "../../../../Common/Constants/dictionary";
 
 interface LanguageSelectorProps {
   onSwapLanguages: () => void;

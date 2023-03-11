@@ -1,5 +1,5 @@
-import { tDictionary } from "../Common/Types/dictionary";
-import { languageCodes } from "../Common/Constants/dictionary";
+import { tDictionary } from "../../Common/Types/dictionary";
+import { languageCodes } from "../../Common/Constants/dictionary";
 
 export const getUpdatedDictionary = (
   prevDictionary: tDictionary,

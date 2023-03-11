@@ -6,7 +6,10 @@ import { GetToKnow } from "./GetToKnow";
 import { Exam } from "./Exam";
 import { Settings } from "./Settings";
 import { tDictionary } from "../../Common/Types/dictionary";
-import { dictionaryObj, languageCodes } from "../../Common/Constants/dictionary";
+import {
+  dictionaryObj,
+  languageCodes,
+} from "../../Common/Constants/dictionary";
 import { getUpdatedDictionary } from "./utils";
 
 const Dictionary: FC = () => {
@@ -21,15 +24,25 @@ const Dictionary: FC = () => {
     if (newWord && translation) {
       console.log("save");
 
+      // Save direct and reverse translation to React State
       setDictionary((prev) => {
-        // Save direct and reverse translation
-        return getUpdatedDictionary(
+        const updatedDictionary = getUpdatedDictionary(
           prev,
           newWord,
           translation,
           translateFrom,
           translateTo
         );
+
+        // TODO: Remember about the limit of 5Mb
+        // Save Dictionary object to Local Storage
+        try {
+          localStorage.setItem("dictionary", JSON.stringify(updatedDictionary));
+        } catch (e) {
+          console.error(e);
+        }
+
+        return updatedDictionary;
       });
     }
   };

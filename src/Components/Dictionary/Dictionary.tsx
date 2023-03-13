@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Dashboard } from "./Dashboard";
 import { AddWord } from "./AddWord";
-import { GetToKnow } from "./GetToKnow";
+import { BringToMind } from "./BringToMind";
 import { Exam } from "./Exam";
 import { Settings } from "./Settings";
 import { tDictionary } from "../../Common/Types/dictionary";
@@ -17,7 +17,9 @@ const Dictionary: FC = () => {
 
   useEffect(() => {
     // Restore a Dictionary object from the Local Storage
-    setDictionary(JSON.parse(localStorage.getItem("dictionary") || '""') || dictionaryObj);
+    setDictionary(
+      JSON.parse(localStorage.getItem("dictionary") || '""') || dictionaryObj
+    );
   }, []);
 
   const handleSaveTranslation = (
@@ -27,8 +29,6 @@ const Dictionary: FC = () => {
     translateTo: languageCodes
   ) => {
     if (newWord && translation) {
-      console.log("save");
-
       // Save direct and reverse translation to React State
       setDictionary((prev) => {
         const updatedDictionary = getUpdatedDictionary(
@@ -65,8 +65,11 @@ const Dictionary: FC = () => {
           />
         }
       />
-      <Route path="/get-to-know" element={<GetToKnow title="Get To Know" />} />
-      <Route path="/exam" element={<Exam title="Take an Exam" />} />
+      <Route
+        path="/bring-to-mind"
+        element={<BringToMind title="Bring To Mind" />}
+      />
+      <Route path="/exam" element={<Exam title="Take An Exam" />} />
       <Route path="/settings" element={<Settings title="Settings" />} />
     </Routes>
   );

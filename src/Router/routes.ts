@@ -8,8 +8,8 @@ export const routes = [
     name: "Add Word",
   },
   {
-    path: "/get-to-know",
-    name: "Get To Know",
+    path: "/bring-to-mind",
+    name: "Bring To Mind",
   },
   {
     path: "/exam",

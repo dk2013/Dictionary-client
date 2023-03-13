@@ -15,7 +15,7 @@ const Dashboard: FC<DashboardProps> = (props) => {
           <NavLink to="/add-word">Add Word</NavLink>
         </div>
         <div className="row halfRow">
-          <NavLink to="/get-to-know">Get To Know</NavLink>
+          <NavLink to="/get-to-know">Bring To Mind</NavLink>
         </div>
         <div className="row halfRow borderLeft">
           <NavLink to="/exam">Exam</NavLink>

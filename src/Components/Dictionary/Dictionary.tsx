@@ -14,6 +14,12 @@ import { getUpdatedDictionary } from "./utils";
 
 const Dictionary: FC = () => {
   const [dictionary, setDictionary] = useState<tDictionary>(dictionaryObj);
+  const [translateFrom, setTranslateFrom] = useState<languageCodes>(
+    languageCodes.ENG
+  );
+  const [translateTo, setTranslateTo] = useState<languageCodes>(
+    languageCodes.RUS
+  );
 
   useEffect(() => {
     // Restore a Dictionary object from the Local Storage
@@ -61,13 +67,24 @@ const Dictionary: FC = () => {
           <AddWord
             title="Add Word"
             dictionary={dictionary}
+            translateFrom={translateFrom}
+            translateTo={translateTo}
             onSaveTranslation={handleSaveTranslation}
+            changeTranslateFrom={(v) => setTranslateFrom(v)}
+            changeTranslateTo={(v) => setTranslateTo(v)}
           />
         }
       />
       <Route
         path="/bring-to-mind"
-        element={<BringToMind title="Bring To Mind" />}
+        element={
+          <BringToMind
+            title="Bring To Mind"
+            dictionary={dictionary}
+            translateFrom={translateFrom}
+            translateTo={translateTo}
+          />
+        }
       />
       <Route path="/exam" element={<Exam title="Take An Exam" />} />
       <Route path="/settings" element={<Settings title="Settings" />} />

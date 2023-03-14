@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { Page } from "../../Page";
 import { LanguageSelector } from "./LanguageSelector";
-import { PageHeader } from "../../Page/PageHeader";
+import { PageHeader } from "../../../Common/Components/PageHeader";
 import { NewWordInput } from "./NewWordInput";
 import { TranslationInput } from "./TranslationInput";
 import { SaveButton } from "../../../Common/Components/SaveButton";
@@ -11,30 +11,28 @@ import { tDictionary } from "../../../Common/Types/dictionary";
 interface AddWordProps {
   title?: string;
   dictionary: tDictionary;
+  translateFrom: languageCodes;
+  translateTo: languageCodes;
   onSaveTranslation: (
     newWord: string,
     translation: string,
     translateFrom: languageCodes,
     translateTo: languageCodes
   ) => void;
+  changeTranslateFrom: (v: languageCodes) => void;
+  changeTranslateTo: (v: languageCodes) => void;
 }
 
 const AddWord: FC<AddWordProps> = (props) => {
   const [newWord, setNewWord] = useState<string>("");
   const [translation, setTranslation] = useState<string>("");
-  const [translateFrom, setTranslateFrom] = useState<languageCodes>(
-    languageCodes.ENG
-  );
-  const [translateTo, setTranslateTo] = useState<languageCodes>(
-    languageCodes.RUS
-  );
 
   const handleNewWordChange = (enteredWord: string) => {
     setNewWord(enteredWord);
     const translatedWord = getTranslationFromDictionary(
       enteredWord,
-      translateFrom,
-      translateTo
+      props.translateFrom,
+      props.translateTo
     );
 
     setTranslation(translatedWord || "");
@@ -51,15 +49,20 @@ const AddWord: FC<AddWordProps> = (props) => {
   };
 
   const handleSave = () => {
-    props.onSaveTranslation(newWord, translation, translateFrom, translateTo);
+    props.onSaveTranslation(
+      newWord,
+      translation,
+      props.translateFrom,
+      props.translateTo
+    );
   };
 
   const handleSwapLanguages = () => {
     if (translation.length) {
       setNewWord(translation);
 
-      const newTranslateTo = translateFrom;
-      const newTranslateFrom = translateTo;
+      const newTranslateTo = props.translateFrom;
+      const newTranslateFrom = props.translateTo;
       const translatedWord = getTranslationFromDictionary(
         translation,
         newTranslateFrom,
@@ -67,8 +70,8 @@ const AddWord: FC<AddWordProps> = (props) => {
       );
 
       setTranslation(translatedWord || "");
-      setTranslateFrom(newTranslateFrom);
-      setTranslateTo(newTranslateTo);
+      props.changeTranslateFrom(newTranslateFrom);
+      props.changeTranslateTo(newTranslateTo);
     }
   };
 
@@ -84,8 +87,8 @@ const AddWord: FC<AddWordProps> = (props) => {
     <Page title={props.title}>
       <PageHeader>Add Word</PageHeader>
       <LanguageSelector
-        translateFrom={translateFrom}
-        translateTo={translateTo}
+        translateFrom={props.translateFrom}
+        translateTo={props.translateTo}
         onSwapLanguages={handleSwapLanguages}
       />
       <NewWordInput

@@ -1,0 +1,10 @@
+.rowContainer {
+  display: flex;
+  flex-basis: 100%;
+  flex-direction: row;
+
+  .cell {
+    flex-basis: 50%;
+    border: 1px solid blue;
+  }
+}

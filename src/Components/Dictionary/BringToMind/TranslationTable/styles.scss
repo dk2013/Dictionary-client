@@ -1,0 +1,14 @@
+.tableContainer {
+  display: flex;
+  flex-direction: column;
+
+  .headerContainer {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .bodyContainer {
+    display: flex;
+    flex-direction: column;
+  }
+}

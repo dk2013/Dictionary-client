@@ -1,12 +1,13 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState, useCallback } from "react";
 import { Page } from "../../Page";
 import { LanguageSelector } from "./LanguageSelector";
 import { PageHeader } from "../../../Common/Components/PageHeader";
 import { NewWordInput } from "./NewWordInput";
 import { TranslationInput } from "./TranslationInput";
-import { SaveButton } from "../../../Common/Components/SaveButton";
+import { Button } from "../../../Common/Components/Button";
 import { languageCodes } from "../../../Common/Constants/dictionary";
 import { tDictionary } from "../../../Common/Types/dictionary";
+import { AiOutlineDelete } from "react-icons/ai";
 
 interface AddWordProps {
   title?: string;
@@ -19,6 +20,12 @@ interface AddWordProps {
     translateFrom: languageCodes,
     translateTo: languageCodes
   ) => void;
+  onDeleteTranslation: (
+    newWord: string,
+    translation: string,
+    translateFrom: languageCodes,
+    translateTo: languageCodes
+  ) => void;
   changeTranslateFrom: (v: languageCodes) => void;
   changeTranslateTo: (v: languageCodes) => void;
 }
@@ -26,6 +33,36 @@ interface AddWordProps {
 const AddWord: FC<AddWordProps> = (props) => {
   const [newWord, setNewWord] = useState<string>("");
   const [translation, setTranslation] = useState<string>("");
+  const [translationExists, setTranslationExists] = useState<boolean>(false);
+
+  const getTranslationFromDictionary = useCallback(
+    (
+      word: string,
+      translateFrom: languageCodes,
+      translateTo: languageCodes
+    ) => {
+      return props.dictionary[translateFrom]?.[word]?.translation?.[
+        translateTo
+      ];
+    },
+    [props.dictionary]
+  );
+
+  useEffect(() => {
+    const translatedWord = getTranslationFromDictionary(
+      newWord,
+      props.translateFrom,
+      props.translateTo
+    );
+
+    setTranslationExists(translatedWord === translation);
+  }, [
+    newWord,
+    translation,
+    props.translateFrom,
+    props.translateTo,
+    getTranslationFromDictionary,
+  ]);
 
   const handleNewWordChange = (enteredWord: string) => {
     setNewWord(enteredWord);
@@ -38,8 +75,8 @@ const AddWord: FC<AddWordProps> = (props) => {
     setTranslation(translatedWord || "");
   };
 
-  const handleTranslationChange = (v: string) => {
-    setTranslation(v);
+  const handleTranslationChange = (enteredWord: string) => {
+    setTranslation(enteredWord);
   };
 
   const handleKeyDown = (key: string) => {
@@ -58,29 +95,31 @@ const AddWord: FC<AddWordProps> = (props) => {
   };
 
   const handleSwapLanguages = () => {
-    if (translation.length) {
-      setNewWord(translation);
+    setNewWord(translation);
 
-      const newTranslateTo = props.translateFrom;
-      const newTranslateFrom = props.translateTo;
-      const translatedWord = getTranslationFromDictionary(
-        translation,
-        newTranslateFrom,
-        newTranslateTo
-      );
+    const newTranslateTo = props.translateFrom;
+    const newTranslateFrom = props.translateTo;
+    const translatedWord = getTranslationFromDictionary(
+      translation,
+      newTranslateFrom,
+      newTranslateTo
+    );
 
-      setTranslation(translatedWord || "");
-      props.changeTranslateFrom(newTranslateFrom);
-      props.changeTranslateTo(newTranslateTo);
-    }
+    setTranslation(translatedWord || "");
+    props.changeTranslateFrom(newTranslateFrom);
+    props.changeTranslateTo(newTranslateTo);
   };
 
-  const getTranslationFromDictionary = (
-    word: string,
-    translateFrom: languageCodes,
-    translateTo: languageCodes
-  ) => {
-    return props.dictionary[translateFrom]?.[word]?.translation?.[translateTo];
+  const handleDelete = () => {
+    props.onDeleteTranslation(
+      newWord,
+      translation,
+      props.translateFrom,
+      props.translateTo
+    );
+
+    setNewWord("");
+    setTranslation("");
   };
 
   return (
@@ -96,15 +135,25 @@ const AddWord: FC<AddWordProps> = (props) => {
         onNewWordChange={(v: string) => handleNewWordChange(v)}
         onKeyDown={handleKeyDown}
       />
+      <Button
+        onSave={handleDelete}
+        disabled={!newWord || !translation || !translationExists}
+      >
+        <AiOutlineDelete></AiOutlineDelete>
+      </Button>
       <TranslationInput
         value={translation}
         onTranslationChange={(v: string) => handleTranslationChange(v)}
         onKeyDown={handleKeyDown}
       />
-      <SaveButton onSave={handleSave} disabled={!newWord || !translation}>
+      <Button
+        onSave={handleSave}
+        disabled={!newWord || !translation || translationExists}
+      >
         Save translation
-      </SaveButton>
+      </Button>
       <button onClick={() => console.log(props.dictionary)}>
+        {/*The button for the debug purpose */}
         show dictionary
       </button>
     </Page>

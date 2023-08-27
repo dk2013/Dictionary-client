@@ -1,13 +1,13 @@
 import React, { FC, ReactNode } from "react";
 import "./styles.scss";
 
-interface SaveButtonProps {
+interface ButtonProps {
   children: ReactNode;
   onSave: () => void;
   disabled?: boolean;
 }
 
-const SaveButton: FC<SaveButtonProps> = ({
+const Button: FC<ButtonProps> = ({
   onSave,
   children,
   disabled = false,
@@ -21,4 +21,4 @@ const SaveButton: FC<SaveButtonProps> = ({
   );
 };
 
-export default SaveButton;
+export default Button;

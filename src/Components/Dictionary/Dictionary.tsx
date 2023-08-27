@@ -10,7 +10,10 @@ import {
   dictionaryObj,
   languageCodes,
 } from "../../Common/Constants/dictionary";
-import { getUpdatedDictionary } from "./utils";
+import {
+  saveAndGetUpdatedDictionary,
+  deleteAndGetUpdatedDictionary,
+} from "./utils";
 
 const Dictionary: FC = () => {
   const [dictionary, setDictionary] = useState<tDictionary>(dictionaryObj);
@@ -37,7 +40,7 @@ const Dictionary: FC = () => {
     if (newWord && translation) {
       // Save direct and reverse translation to React State
       setDictionary((prev) => {
-        const updatedDictionary = getUpdatedDictionary(
+        const updatedDictionary = saveAndGetUpdatedDictionary(
           prev,
           newWord,
           translation,
@@ -45,17 +48,45 @@ const Dictionary: FC = () => {
           translateTo
         );
 
-        // TODO: Remember about the limit of 5Mb
-        // Save Dictionary object to Local Storage
-        try {
-          localStorage.setItem("dictionary", JSON.stringify(updatedDictionary));
-        } catch (e) {
-          console.error(e);
-        }
+        saveDictionaryToStorage("dictionary", updatedDictionary);
 
         return updatedDictionary;
       });
     }
+  };
+
+  const saveDictionaryToStorage = (
+    key: string,
+    dictionary: tDictionary
+  ): void => {
+    // TODO: Remember about the limit of 5Mb
+    // Save Dictionary object to Local Storage
+    try {
+      localStorage.setItem("dictionary", JSON.stringify(dictionary));
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleDeleteTranslation = (
+    newWord: string,
+    translation: string,
+    translateFrom: languageCodes,
+    translateTo: languageCodes
+  ) => {
+    setDictionary((prev) => {
+      const updatedDictionary = deleteAndGetUpdatedDictionary(
+        prev,
+        newWord,
+        translation,
+        translateFrom,
+        translateTo
+      );
+
+      saveDictionaryToStorage("dictionary", updatedDictionary);
+
+      return updatedDictionary;
+    });
   };
 
   return (
@@ -70,6 +101,7 @@ const Dictionary: FC = () => {
             translateFrom={translateFrom}
             translateTo={translateTo}
             onSaveTranslation={handleSaveTranslation}
+            onDeleteTranslation={handleDeleteTranslation}
             changeTranslateFrom={(v) => setTranslateFrom(v)}
             changeTranslateTo={(v) => setTranslateTo(v)}
           />

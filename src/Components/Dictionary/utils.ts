@@ -1,7 +1,7 @@
 import { tDictionary } from "../../Common/Types/dictionary";
 import { languageCodes } from "../../Common/Constants/dictionary";
 
-export const getUpdatedDictionary = (
+export const saveAndGetUpdatedDictionary = (
   prevDictionary: tDictionary,
   newWord: string,
   translation: string,
@@ -9,7 +9,7 @@ export const getUpdatedDictionary = (
   translateTo: languageCodes
 ): tDictionary => {
   // Save direct translation
-  prevDictionary = getUpdatedDictionaryObject(
+  let updatedDictionary = saveAndGetUpdatedDictionaryObject(
     prevDictionary,
     newWord,
     translation,
@@ -18,18 +18,48 @@ export const getUpdatedDictionary = (
   );
 
   // Save reverse translation
-  prevDictionary = getUpdatedDictionaryObject(
-    prevDictionary,
+  updatedDictionary = saveAndGetUpdatedDictionaryObject(
+    updatedDictionary,
     translation,
     newWord,
     translateTo,
     translateFrom
   );
+  // TODO: Now it's not optimized because it copies an object two times
 
-  return prevDictionary;
+  return updatedDictionary;
 };
 
-const getUpdatedDictionaryObject = (
+export const deleteAndGetUpdatedDictionary = (
+  prevDictionary: tDictionary,
+  newWord: string,
+  translation: string,
+  translateFrom: languageCodes,
+  translateTo: languageCodes
+): tDictionary => {
+  // Delete direct translation
+  let updatedDictionary = deleteAndGetUpdatedDictionaryObject(
+    prevDictionary,
+    newWord,
+    translation,
+    translateFrom,
+    translateTo
+  );
+
+  // Delete reverse translation
+  updatedDictionary = deleteAndGetUpdatedDictionaryObject(
+    updatedDictionary,
+    translation,
+    newWord,
+    translateTo,
+    translateFrom
+  );
+  // TODO: Now it's not optimized because it copies an object two times
+
+  return updatedDictionary;
+};
+
+const saveAndGetUpdatedDictionaryObject = (
   prevDictionary: tDictionary,
   newWord: string,
   translation: string,
@@ -76,4 +106,32 @@ const getUpdatedDictionaryObject = (
       },
     };
   }
+};
+
+const deleteAndGetUpdatedDictionaryObject = (
+  prevDictionary: tDictionary,
+  newWord: string,
+  translation: string,
+  translateFrom: languageCodes,
+  translateTo: languageCodes
+): tDictionary => {
+  let updatedDictionary = Object.assign({}, prevDictionary);
+
+  if (
+    updatedDictionary?.[translateFrom]?.[newWord]?.translation?.[translateTo]
+  ) {
+    delete updatedDictionary[translateFrom]?.[newWord].translation?.[
+      translateTo
+    ];
+
+    if (
+      !Object.keys(
+        updatedDictionary[translateFrom]?.[newWord].translation || {}
+      ).length
+    ) {
+      delete updatedDictionary[translateFrom]?.[newWord];
+    }
+  }
+
+  return updatedDictionary;
 };

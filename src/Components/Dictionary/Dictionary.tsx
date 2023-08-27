@@ -17,10 +17,10 @@ import {
 
 const Dictionary: FC = () => {
   const [dictionary, setDictionary] = useState<tDictionary>(dictionaryObj);
-  const [translateFrom, setTranslateFrom] = useState<languageCodes>(
+  const [translateFrom, setTranslateFrom] = useState<string>(
     languageCodes.ENG
   );
-  const [translateTo, setTranslateTo] = useState<languageCodes>(
+  const [translateTo, setTranslateTo] = useState<string>(
     languageCodes.RUS
   );
 
@@ -34,8 +34,8 @@ const Dictionary: FC = () => {
   const handleSaveTranslation = (
     newWord: string,
     translation: string,
-    translateFrom: languageCodes,
-    translateTo: languageCodes
+    translateFrom: string,
+    translateTo: string
   ) => {
     if (newWord && translation) {
       // Save direct and reverse translation to React State
@@ -71,8 +71,8 @@ const Dictionary: FC = () => {
   const handleDeleteTranslation = (
     newWord: string,
     translation: string,
-    translateFrom: languageCodes,
-    translateTo: languageCodes
+    translateFrom: string,
+    translateTo: string
   ) => {
     setDictionary((prev) => {
       const updatedDictionary = deleteAndGetUpdatedDictionary(
@@ -115,6 +115,8 @@ const Dictionary: FC = () => {
             dictionary={dictionary}
             translateFrom={translateFrom}
             translateTo={translateTo}
+            changeTranslateFrom={(v) => setTranslateFrom(v)}
+            changeTranslateTo={(v) => setTranslateTo(v)}
           />
         }
       />

@@ -1,7 +1,5 @@
-import { languageCodes } from "../Constants/dictionary";
-
 type Translation = {
-  [index in languageCodes]?: string;
+  [index: string]: string;
 };
 
 type Word = {
@@ -11,5 +9,5 @@ type Word = {
 };
 
 export type tDictionary = {
-  [index in languageCodes]?: Word;
+  [index: string]: Word;
 };

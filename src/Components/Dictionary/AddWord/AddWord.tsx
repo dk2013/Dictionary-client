@@ -1,33 +1,32 @@
 import { FC, useEffect, useState, useCallback } from "react";
 import { Page } from "../../Page";
-import { LanguageSelector } from "./LanguageSelector";
+import { LanguageSelector } from "../../../Common/Components/LanguageSelector";
 import { PageHeader } from "../../../Common/Components/PageHeader";
 import { NewWordInput } from "./NewWordInput";
 import { TranslationInput } from "./TranslationInput";
 import { Button } from "../../../Common/Components/Button";
-import { languageCodes } from "../../../Common/Constants/dictionary";
 import { tDictionary } from "../../../Common/Types/dictionary";
 import { AiOutlineDelete } from "react-icons/ai";
 
 interface AddWordProps {
   title?: string;
   dictionary: tDictionary;
-  translateFrom: languageCodes;
-  translateTo: languageCodes;
+  translateFrom: string;
+  translateTo: string;
   onSaveTranslation: (
     newWord: string,
     translation: string,
-    translateFrom: languageCodes,
-    translateTo: languageCodes
+    translateFrom: string,
+    translateTo: string
   ) => void;
   onDeleteTranslation: (
     newWord: string,
     translation: string,
-    translateFrom: languageCodes,
-    translateTo: languageCodes
+    translateFrom: string,
+    translateTo: string
   ) => void;
-  changeTranslateFrom: (v: languageCodes) => void;
-  changeTranslateTo: (v: languageCodes) => void;
+  changeTranslateFrom: (v: string) => void;
+  changeTranslateTo: (v: string) => void;
 }
 
 const AddWord: FC<AddWordProps> = (props) => {
@@ -36,11 +35,7 @@ const AddWord: FC<AddWordProps> = (props) => {
   const [translationExists, setTranslationExists] = useState<boolean>(false);
 
   const getTranslationFromDictionary = useCallback(
-    (
-      word: string,
-      translateFrom: languageCodes,
-      translateTo: languageCodes
-    ) => {
+    (word: string, translateFrom: string, translateTo: string) => {
       return props.dictionary[translateFrom]?.[word]?.translation?.[
         translateTo
       ];

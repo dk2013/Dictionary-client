@@ -1,12 +1,17 @@
 import { tDictionary } from "../Types/dictionary";
 
-export const enum languageCodes { // ISO 639-2 Code
-  ENG = "ENG",
-  RUS = "RUS",
-  UKR = "UKR",
-  SPA = "SPA",
-  GER = "GER",
-}
+export type LanguageCodes = {
+  [index: string]: string;
+};
+
+export const languageCodes: LanguageCodes = {
+  // ISO 639-2 Code
+  ENG: "ENG",
+  RUS: "RUS",
+  UKR: "UKR",
+  SPA: "SPA",
+  GER: "GER",
+};
 
 export const dictionaryObj: tDictionary = {
   // ver 2

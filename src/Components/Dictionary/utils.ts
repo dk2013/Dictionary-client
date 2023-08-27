@@ -1,12 +1,11 @@
 import { tDictionary } from "../../Common/Types/dictionary";
-import { languageCodes } from "../../Common/Constants/dictionary";
 
 export const saveAndGetUpdatedDictionary = (
   prevDictionary: tDictionary,
   newWord: string,
   translation: string,
-  translateFrom: languageCodes,
-  translateTo: languageCodes
+  translateFrom: string,
+  translateTo: string
 ): tDictionary => {
   // Save direct translation
   let updatedDictionary = saveAndGetUpdatedDictionaryObject(
@@ -34,8 +33,8 @@ export const deleteAndGetUpdatedDictionary = (
   prevDictionary: tDictionary,
   newWord: string,
   translation: string,
-  translateFrom: languageCodes,
-  translateTo: languageCodes
+  translateFrom: string,
+  translateTo: string
 ): tDictionary => {
   // Delete direct translation
   let updatedDictionary = deleteAndGetUpdatedDictionaryObject(
@@ -63,8 +62,8 @@ const saveAndGetUpdatedDictionaryObject = (
   prevDictionary: tDictionary,
   newWord: string,
   translation: string,
-  translateFrom: languageCodes,
-  translateTo: languageCodes
+  translateFrom: string,
+  translateTo: string
 ): tDictionary => {
   if (prevDictionary[translateFrom]) {
     if (prevDictionary[translateFrom]?.[newWord]) {
@@ -112,8 +111,8 @@ const deleteAndGetUpdatedDictionaryObject = (
   prevDictionary: tDictionary,
   newWord: string,
   translation: string,
-  translateFrom: languageCodes,
-  translateTo: languageCodes
+  translateFrom: string,
+  translateTo: string
 ): tDictionary => {
   let updatedDictionary = Object.assign({}, prevDictionary);
 

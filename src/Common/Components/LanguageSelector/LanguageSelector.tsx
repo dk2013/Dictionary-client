@@ -1,12 +1,11 @@
 import React, { FC } from "react";
 import "./styles.scss";
 import { FaArrowRight } from "react-icons/fa";
-import { languageCodes } from "../../../../Common/Constants/dictionary";
 
 interface LanguageSelectorProps {
   onSwapLanguages: () => void;
-  translateFrom: languageCodes;
-  translateTo: languageCodes;
+  translateFrom: string;
+  translateTo: string;
 }
 
 const LanguageSelector: FC<LanguageSelectorProps> = (props) => {

@@ -1,18 +1,24 @@
 import React, { FC } from "react";
 import "./styles.scss";
-import { languageCodes } from "../../../../../Common/Constants/dictionary";
+import { maskedColumns } from "../TranslationTable";
 
 interface ColumnHeaderProps {
-  position: "left" | "right";
-  language: languageCodes;
+  position: string;
+  language: string;
+  masked: string;
+  onMaskToggle: (language: string) => void;
 }
 
-const ColumnHeader: FC<ColumnHeaderProps> = ({ position, language }) => {
+const ColumnHeader: FC<ColumnHeaderProps> = (props) => {
   return (
     <div className="columnContainer">
-      <h4>{language}</h4>
+      <h4>{props.language}</h4>
       <div>
-        <button>hide</button>
+        <button onClick={() => props.onMaskToggle(props.language)}>
+          {props.masked === props.language
+            ? "unmask"
+            : "mask"}
+        </button>
         <button>sort by name ⬇️</button>
       </div>
     </div>

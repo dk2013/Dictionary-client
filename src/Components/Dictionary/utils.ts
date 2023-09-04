@@ -63,7 +63,8 @@ const saveAndGetUpdatedDictionaryObject = (
   newWord: string,
   translation: string,
   translateFrom: string,
-  translateTo: string
+  translateTo: string,
+  // modified: Date = new Date()
 ): tDictionary => {
   if (prevDictionary[translateFrom]) {
     if (prevDictionary[translateFrom]?.[newWord]) {
@@ -89,6 +90,7 @@ const saveAndGetUpdatedDictionaryObject = (
             translation: {
               [translateTo]: translation,
             },
+            // modified: modified,
           },
         },
       };
@@ -101,6 +103,7 @@ const saveAndGetUpdatedDictionaryObject = (
           translation: {
             [translateTo]: translation,
           },
+          // modified: modified,
         },
       },
     };

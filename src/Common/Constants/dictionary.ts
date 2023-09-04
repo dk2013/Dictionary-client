@@ -1,8 +1,4 @@
-import { tDictionary } from "../Types/dictionary";
-
-export type LanguageCodes = {
-  [index: string]: string;
-};
+import { LanguageCodes, tDictionary } from "../Types/dictionary";
 
 export const languageCodes: LanguageCodes = {
   // ISO 639-2 Code
@@ -21,6 +17,7 @@ export const dictionaryObj: tDictionary = {
         RUS: "вода",
         SPA: "agua",
       },
+      // modified: new Date("2019/05/11 20:04:32"), // yyyy/MM/dd hh:mm:ss
     },
   },
   RUS: {
@@ -29,6 +26,7 @@ export const dictionaryObj: tDictionary = {
         ENG: "water",
         SPA: "agua",
       },
+      // modified: new Date("2019/05/11 20:04:32"),
     },
   },
 };
@@ -71,5 +69,7 @@ dictionary: { // ver 2
     }
   }
 }
+
+
 
  */

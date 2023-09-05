@@ -9,6 +9,7 @@ export const languageCodes: LanguageCodes = {
   GER: "GER",
 };
 
+/*
 export const dictionaryObj: tDictionary = {
   // ver 2
   ENG: {
@@ -17,7 +18,6 @@ export const dictionaryObj: tDictionary = {
         RUS: "вода",
         SPA: "agua",
       },
-      // modified: new Date("2019/05/11 20:04:32"), // yyyy/MM/dd hh:mm:ss
     },
   },
   RUS: {
@@ -26,10 +26,10 @@ export const dictionaryObj: tDictionary = {
         ENG: "water",
         SPA: "agua",
       },
-      // modified: new Date("2019/05/11 20:04:32"),
     },
   },
 };
+*/
 
 // кохання - любовь - love
 // любов - любовь - love
@@ -70,6 +70,42 @@ dictionary: { // ver 2
   }
 }
 
+*/
 
-
- */
+// dictionary structure ver 3
+export const dictionaryObj: tDictionary = {
+  ENG: {
+    water: {
+      RUS: [
+        {
+          translation: "вода",
+          modified: new Date("2019/05/11 20:04:32"),
+          order: 1,
+        },
+        // {
+        //   translation: "водичка",
+        //   modified: new Date("2019/05/11 20:04:32"),
+        //   order: 2,
+        // },
+      ],
+      ESP: [
+        {
+          translation: "agua",
+          modified: new Date("2019/05/11 20:04:32"),
+          order: 1,
+        },
+      ],
+    },
+  },
+  RUS: {
+    вода: {
+      ENG: [
+        {
+          translation: "water",
+          modified: new Date("2019/05/11 20:04:32"),
+          order: 1,
+        },
+      ],
+    },
+  },
+};

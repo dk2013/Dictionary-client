@@ -1,20 +1,25 @@
-type Translation = {
+export type LanguageCodes = {
   [index: string]: string;
 };
 
+type Translation = string;
 type Modified = Date;
+type Order = number;
 
 type Word = {
-  [index: string]: {
-    translation: Translation;
-    // modified: Modified;
-  };
+  translation: Translation;
+  modified: Modified;
+  order: Order;
+};
+
+type Translations = {
+  [index in keyof LanguageCodes]: Word[];
+};
+
+type Words = {
+  [index: string]: Translations;
 };
 
 export type tDictionary = {
-  [index: string]: Word;
-};
-
-export type LanguageCodes = {
-  [index: string]: string;
+  [index in keyof LanguageCodes]: Words;
 };

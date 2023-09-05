@@ -17,8 +17,8 @@ interface ColumnHeaderProps {
 const ColumnHeader: FC<ColumnHeaderProps> = (props) => {
   const arrow = props.orderBy === sortOrders.DESC ? "⬇️" : "⬆️";
 
-  console.log(Object.keys(fields));
-  console.log(typeof fields);
+  // console.log(Object.keys(fields));
+  // console.log(typeof fields);
 
   return (
     <div className="columnContainer">

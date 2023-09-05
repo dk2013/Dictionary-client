@@ -36,9 +36,8 @@ const AddWord: FC<AddWordProps> = (props) => {
 
   const getTranslationFromDictionary = useCallback(
     (word: string, translateFrom: string, translateTo: string) => {
-      return props.dictionary[translateFrom]?.[word]?.translation?.[
-        translateTo
-      ];
+      return props.dictionary[translateFrom]?.[word]?.[translateTo]?.[0]
+        .translation;
     },
     [props.dictionary]
   );

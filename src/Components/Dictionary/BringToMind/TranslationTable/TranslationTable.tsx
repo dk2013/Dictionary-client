@@ -16,7 +16,6 @@ interface TranslationTableProps {
 export const selectedColumns = {
   ...languageCodes,
   NONE: "NONE",
-  // BOTH: "BOTH", // Doesn't make sense
 };
 
 export const positionColumns = {
@@ -40,23 +39,28 @@ const TranslationTable: FC<TranslationTableProps> = (props) => {
   const [sortByField, setSortByField] = useState<fields>(fields.NAME);
   const [orderBy, setOrderBy] = useState<sortOrders>(sortOrders.ASC);
 
-  // console.log(Object.keys(fields))
+  let sortedDictionary = null;
 
   // Sort a dictionary object (convert it to a sorted array)
-  let sortedDictionary = Object.entries(props.dictionary[props.translateFrom]);
-  if (props.translateFrom === sortByColumn) {
-    sortedDictionary.sort((a, b) => {
-      return (orderBy === sortOrders.DESC ? -1 : 1) * a[0].localeCompare(b[0]);
-    });
-  } else {
-    sortedDictionary.sort((a, b) => {
-      return (
-        (orderBy === sortOrders.DESC ? -1 : 1) *
-        a[1].translation[props.translateTo].localeCompare(
-          b[1].translation[props.translateTo]
-        )
-      );
-    });
+  if (props.dictionary && props.translateFrom in props.dictionary) {
+    sortedDictionary = Object.entries(props.dictionary[props.translateFrom]);
+
+    if (props.translateFrom === sortByColumn) {
+      sortedDictionary.sort((a, b) => {
+        return (
+          (orderBy === sortOrders.DESC ? -1 : 1) * a[0].localeCompare(b[0])
+        );
+      });
+    } else {
+      sortedDictionary.sort((a, b) => {
+        return (
+          (orderBy === sortOrders.DESC ? -1 : 1) *
+          a[1][props.translateTo][0].translation.localeCompare(
+            b[1][props.translateTo][0].translation
+          )
+        );
+      });
+    }
   }
 
   const handleMaskToggle = (language: string) => {
@@ -121,16 +125,17 @@ const TranslationTable: FC<TranslationTableProps> = (props) => {
         />
       </div>
       <div className="bodyContainer">
-        {sortedDictionary.map(([k, v]) => (
-          <Row
-            key={k}
-            word={k}
-            translation={v.translation[props.translateTo] || ""}
-            masked={masked}
-            translateFrom={props.translateFrom}
-            translateTo={props.translateTo}
-          />
-        ))}
+        {sortedDictionary &&
+          sortedDictionary.map(([k, v]) => (
+            <Row
+              key={k}
+              word={k}
+              translation={v[props.translateTo]?.[0].translation || ""}
+              masked={masked}
+              translateFrom={props.translateFrom}
+              translateTo={props.translateTo}
+            />
+          ))}
       </div>
     </div>
   );

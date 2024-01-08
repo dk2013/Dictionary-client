@@ -23,3 +23,9 @@ type Words = {
 export type tDictionary = {
   [index in keyof LanguageCodes]: Words;
 };
+
+type Entries<T> = {
+  [K in keyof T]: [K, T[K]];
+}[keyof T][];
+
+export type SortedDictionary = Entries<Words>;

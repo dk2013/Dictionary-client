@@ -3,8 +3,12 @@ import "./styles.scss";
 import { ColumnHeader } from "./ColumnHeader";
 import { languageCodes } from "../../../../Common/Constants/dictionary";
 import { Row } from "./Row";
-import { tDictionary } from "../../../../Common/Types/dictionary";
+import {
+  SortedDictionary,
+  tDictionary,
+} from "../../../../Common/Types/dictionary";
 import { LanguageSelector } from "../../../../Common/Components/LanguageSelector";
+import { sort } from "./utils";
 
 interface TranslationTableProps {
   dictionary: tDictionary;
@@ -39,28 +43,20 @@ const TranslationTable: FC<TranslationTableProps> = (props) => {
   const [sortByField, setSortByField] = useState<fields>(fields.NAME);
   const [orderBy, setOrderBy] = useState<sortOrders>(sortOrders.ASC);
 
-  let sortedDictionary = null;
+  let sortedDictionary: SortedDictionary | null = null;
 
   // Sort a dictionary object (convert it to a sorted array)
   if (props.dictionary && props.translateFrom in props.dictionary) {
     sortedDictionary = Object.entries(props.dictionary[props.translateFrom]);
 
-    if (props.translateFrom === sortByColumn) {
-      sortedDictionary.sort((a, b) => {
-        return (
-          (orderBy === sortOrders.DESC ? -1 : 1) * a[0].localeCompare(b[0])
-        );
-      });
-    } else {
-      sortedDictionary.sort((a, b) => {
-        return (
-          (orderBy === sortOrders.DESC ? -1 : 1) *
-          a[1][props.translateTo][0].translation.localeCompare(
-            b[1][props.translateTo][0].translation
-          )
-        );
-      });
-    }
+    sort(
+      orderBy,
+      sortByColumn,
+      sortByField,
+      sortedDictionary,
+      props.translateFrom,
+      props.translateTo
+    );
   }
 
   const handleMaskToggle = (language: string) => {

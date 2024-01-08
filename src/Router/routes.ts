@@ -13,6 +13,6 @@ export const routes = [
   },
   {
     path: "/exam",
-    name: "Exam",
+    name: "Check Yourself",
   },
 ];

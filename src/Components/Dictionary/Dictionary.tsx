@@ -17,12 +17,8 @@ import {
 
 const Dictionary: FC = () => {
   const [dictionary, setDictionary] = useState<tDictionary>(dictionaryObj);
-  const [translateFrom, setTranslateFrom] = useState<string>(
-    languageCodes.ENG
-  );
-  const [translateTo, setTranslateTo] = useState<string>(
-    languageCodes.RUS
-  );
+  const [translateFrom, setTranslateFrom] = useState<string>(languageCodes.ENG);
+  const [translateTo, setTranslateTo] = useState<string>(languageCodes.RUS);
 
   useEffect(() => {
     // Restore a Dictionary object from the Local Storage
@@ -120,7 +116,18 @@ const Dictionary: FC = () => {
           />
         }
       />
-      <Route path="/exam" element={<Exam title="Take An Exam" />} />
+      <Route
+        path="/exam"
+        element={
+          <Exam
+            title="Check Yourself"
+            translateFrom={translateFrom}
+            translateTo={translateTo}
+            changeTranslateFrom={(v) => setTranslateFrom(v)}
+            changeTranslateTo={(v) => setTranslateTo(v)}
+          />
+        }
+      />
       <Route path="/settings" element={<Settings title="Settings" />} />
     </Routes>
   );

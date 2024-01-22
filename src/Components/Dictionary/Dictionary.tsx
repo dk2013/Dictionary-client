@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Dashboard } from "./Dashboard";
 import { AddWord } from "./AddWord";
@@ -15,17 +15,28 @@ import {
   deleteAndGetUpdatedDictionary,
 } from "./utils";
 
+const BASE_API_URL = "http://localhost:8000";
+
 const Dictionary: FC = () => {
   const [dictionary, setDictionary] = useState<tDictionary>(dictionaryObj);
   const [translateFrom, setTranslateFrom] = useState<string>(languageCodes.ENG);
   const [translateTo, setTranslateTo] = useState<string>(languageCodes.RUS);
 
-  useEffect(() => {
-    // Restore a Dictionary object from the Local Storage
-    setDictionary(
-      JSON.parse(localStorage.getItem("dictionary") || '""') || dictionaryObj
-    );
+  const getDictionary = useCallback(async () => {
+    try {
+      const result = await fetch(`${BASE_API_URL}/dictionary`);
+      const dictionary: tDictionary = await result.json();
+      setDictionary(
+        dictionary ?? dictionaryObj
+      );
+    } catch (error) {
+      console.error("Error fetching dictionary:", error);
+    }
   }, []);
+
+  useEffect(() => {
+    getDictionary();
+  }, [getDictionary]);
 
   const handleSaveTranslation = (
     newWord: string,

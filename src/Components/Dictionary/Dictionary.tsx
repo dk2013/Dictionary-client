@@ -24,7 +24,8 @@ const Dictionary: FC = () => {
 
   const getDictionary = useCallback(async () => {
     try {
-      const result = await fetch(`${BASE_API_URL}/dictionary`);
+      const hardcodedDictionaryId = '6757d9cb74529a16e5bc1396';
+      const result = await fetch(`${BASE_API_URL}/dictionary/${hardcodedDictionaryId}`);
       const dictionary: tDictionary = await result.json();
       setDictionary(
         dictionary ?? dictionaryObj

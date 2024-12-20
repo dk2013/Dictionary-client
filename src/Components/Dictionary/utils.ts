@@ -4,16 +4,16 @@ export const saveAndGetUpdatedDictionary = (
   prevDictionary: tDictionary,
   newWord: string,
   translation: string,
-  translateFrom: string,
-  translateTo: string
+  translationFrom: string,
+  translationTo: string
 ): tDictionary => {
   // Save direct translation
   let updatedDictionary = saveAndGetUpdatedDictionaryObject(
     prevDictionary,
     newWord,
     translation,
-    translateFrom,
-    translateTo
+    translationFrom,
+    translationTo
   );
 
   // Save reverse translation
@@ -21,8 +21,8 @@ export const saveAndGetUpdatedDictionary = (
     updatedDictionary,
     translation,
     newWord,
-    translateTo,
-    translateFrom
+    translationTo,
+    translationFrom
   );
   // TODO: Now it's not optimized because it copies an object two times
 
@@ -33,16 +33,16 @@ export const deleteAndGetUpdatedDictionary = (
   prevDictionary: tDictionary,
   newWord: string,
   translation: string,
-  translateFrom: string,
-  translateTo: string
+  translationFrom: string,
+  translationTo: string
 ): tDictionary => {
   // Delete direct translation
   let updatedDictionary = deleteAndGetUpdatedDictionaryObject(
     prevDictionary,
     newWord,
     // translation,
-    translateFrom,
-    translateTo
+    translationFrom,
+    translationTo
   );
 
   // Delete reverse translation
@@ -50,8 +50,8 @@ export const deleteAndGetUpdatedDictionary = (
     updatedDictionary,
     translation,
     // newWord,
-    translateTo,
-    translateFrom
+    translationTo,
+    translationFrom
   );
   // TODO: Now it's not optimized because it copies an object two times
 
@@ -62,19 +62,19 @@ const saveAndGetUpdatedDictionaryObject = (
   prevDictionary: tDictionary,
   newWord: string,
   translation: string,
-  translateFrom: string,
-  translateTo: string
+  translationFrom: string,
+  translationTo: string
   // modified: Date = new Date()
 ): tDictionary => {
-  if (prevDictionary[translateFrom]) {
-    if (prevDictionary[translateFrom]?.[newWord]) {
+  if (prevDictionary[translationFrom]) {
+    if (prevDictionary[translationFrom]?.[newWord]) {
       return {
         ...prevDictionary,
-        [translateFrom]: {
-          ...prevDictionary[translateFrom],
+        [translationFrom]: {
+          ...prevDictionary[translationFrom],
           [newWord]: {
-            ...prevDictionary[translateFrom]?.[newWord],
-            [translateTo]: [
+            ...prevDictionary[translationFrom]?.[newWord],
+            [translationTo]: [
               {
                 translation: translation,
                 modified: new Date(),
@@ -87,10 +87,10 @@ const saveAndGetUpdatedDictionaryObject = (
     } else {
       return {
         ...prevDictionary,
-        [translateFrom]: {
-          ...prevDictionary[translateFrom],
+        [translationFrom]: {
+          ...prevDictionary[translationFrom],
           [newWord]: {
-            [translateTo]: [
+            [translationTo]: [
               {
                 translation: translation,
                 modified: new Date(),
@@ -104,9 +104,9 @@ const saveAndGetUpdatedDictionaryObject = (
   } else {
     return {
       ...prevDictionary,
-      [translateFrom]: {
+      [translationFrom]: {
         [newWord]: {
-          [translateTo]: [
+          [translationTo]: [
             {
               translation: translation,
               modified: new Date(),
@@ -123,23 +123,23 @@ const deleteAndGetUpdatedDictionaryObject = (
   prevDictionary: tDictionary,
   newWord: string,
   // translation: string,
-  translateFrom: string,
-  translateTo: string
+  translationFrom: string,
+  translationTo: string
 ): tDictionary => {
   let updatedDictionary = Object.assign({}, prevDictionary);
 
   if (
-    updatedDictionary?.[translateFrom]?.[newWord]?.[translateTo]?.[0] // TODO: For now we operate just the first element of translation array
+    updatedDictionary?.[translationFrom]?.[newWord]?.[translationTo]?.[0] // TODO: For now we operate just the first element of translation array
       ?.translation
   ) {
-    delete updatedDictionary?.[translateFrom]?.[newWord]?.[translateTo]?.[0]; // TODO: For now we operate just the first element of translation array
+    delete updatedDictionary?.[translationFrom]?.[newWord]?.[translationTo]?.[0]; // TODO: For now we operate just the first element of translation array
 
     if (
       !Object.keys(
-        updatedDictionary[translateFrom]?.[newWord].translation || {}
+        updatedDictionary[translationFrom]?.[newWord].translation || {}
       ).length
     ) {
-      delete updatedDictionary[translateFrom]?.[newWord];
+      delete updatedDictionary[translationFrom]?.[newWord];
     }
   }
 

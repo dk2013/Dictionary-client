@@ -11,22 +11,22 @@ import { AiOutlineDelete } from "react-icons/ai";
 interface AddWordProps {
   title?: string;
   dictionary: tDictionary;
-  translateFrom: string;
-  translateTo: string;
+  translationFrom: string;
+  translationTo: string;
   onSaveTranslation: (
     newWord: string,
     translation: string,
-    translateFrom: string,
-    translateTo: string
+    translationFrom: string,
+    translationTo: string
   ) => void;
   onDeleteTranslation: (
     newWord: string,
     translation: string,
-    translateFrom: string,
-    translateTo: string
+    translationFrom: string,
+    translationTo: string
   ) => void;
   changeTranslateFrom: (v: string) => void;
-  changeTranslateTo: (v: string) => void;
+  changeTranslationTo: (v: string) => void;
 }
 
 const AddWord: FC<AddWordProps> = (props) => {
@@ -35,8 +35,8 @@ const AddWord: FC<AddWordProps> = (props) => {
   const [translationExists, setTranslationExists] = useState<boolean>(false);
 
   const getTranslationFromDictionary = useCallback(
-    (word: string, translateFrom: string, translateTo: string) => {
-      return props.dictionary[translateFrom]?.[word]?.[translateTo]?.[0]
+    (word: string, translationFrom: string, translationTo: string) => {
+      return props.dictionary[translationFrom]?.[word]?.[translationTo]?.[0]
         .translation;
     },
     [props.dictionary]
@@ -45,16 +45,16 @@ const AddWord: FC<AddWordProps> = (props) => {
   useEffect(() => {
     const translatedWord = getTranslationFromDictionary(
       newWord,
-      props.translateFrom,
-      props.translateTo
+      props.translationFrom,
+      props.translationTo
     );
 
     setTranslationExists(translatedWord === translation);
   }, [
     newWord,
     translation,
-    props.translateFrom,
-    props.translateTo,
+    props.translationFrom,
+    props.translationTo,
     getTranslationFromDictionary,
   ]);
 
@@ -62,8 +62,8 @@ const AddWord: FC<AddWordProps> = (props) => {
     setNewWord(enteredWord);
     const translatedWord = getTranslationFromDictionary(
       enteredWord,
-      props.translateFrom,
-      props.translateTo
+      props.translationFrom,
+      props.translationTo
     );
 
     setTranslation(translatedWord || "");
@@ -83,33 +83,33 @@ const AddWord: FC<AddWordProps> = (props) => {
     props.onSaveTranslation(
       newWord,
       translation,
-      props.translateFrom,
-      props.translateTo
+      props.translationFrom,
+      props.translationTo
     );
   };
 
   const handleSwapLanguages = () => {
     setNewWord(translation);
 
-    const newTranslateTo = props.translateFrom;
-    const newTranslateFrom = props.translateTo;
+    const newTranslationTo = props.translationFrom;
+    const newTranslateFrom = props.translationTo;
     const translatedWord = getTranslationFromDictionary(
       translation,
       newTranslateFrom,
-      newTranslateTo
+      newTranslationTo
     );
 
     setTranslation(translatedWord || "");
     props.changeTranslateFrom(newTranslateFrom);
-    props.changeTranslateTo(newTranslateTo);
+    props.changeTranslationTo(newTranslationTo);
   };
 
   const handleDelete = () => {
     props.onDeleteTranslation(
       newWord,
       translation,
-      props.translateFrom,
-      props.translateTo
+      props.translationFrom,
+      props.translationTo
     );
 
     setNewWord("");
@@ -120,8 +120,8 @@ const AddWord: FC<AddWordProps> = (props) => {
     <Page title={props.title}>
       <PageHeader>Add Word</PageHeader>
       <LanguageSelector
-        translateFrom={props.translateFrom}
-        translateTo={props.translateTo}
+        translationFrom={props.translationFrom}
+        translationTo={props.translationTo}
         onSwapLanguages={handleSwapLanguages}
       />
       <NewWordInput

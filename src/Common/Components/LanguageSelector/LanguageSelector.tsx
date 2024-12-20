@@ -4,16 +4,16 @@ import { FaArrowRight } from "react-icons/fa";
 
 interface LanguageSelectorProps {
   onSwapLanguages: () => void;
-  translateFrom: string;
-  translateTo: string;
+  translationFrom: string;
+  translationTo: string;
 }
 
 const LanguageSelector: FC<LanguageSelectorProps> = (props) => {
   return (
     <div className="languageSelector">
-      {props.translateFrom}{" "}
+      {props.translationFrom}{" "}
       <FaArrowRight onClick={props.onSwapLanguages} className="ico" />{" "}
-      {props.translateTo}
+      {props.translationTo}
     </div>
   );
 };

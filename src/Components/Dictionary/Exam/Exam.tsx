@@ -6,19 +6,19 @@ import { Block } from "../../../Common/Components/Block";
 
 interface ExamProps {
   title?: string;
-  translateFrom: string;
-  translateTo: string;
+  translationFrom: string;
+  translationTo: string;
   changeTranslateFrom: (v: string) => void;
-  changeTranslateTo: (v: string) => void;
+  changeTranslationTo: (v: string) => void;
 }
 
 const Exam: FC<ExamProps> = (props) => {
   const handleSwapLanguages = () => {
-    const newTranslateTo = props.translateFrom;
-    const newTranslateFrom = props.translateTo;
+    const newTranslationTo = props.translationFrom;
+    const newTranslateFrom = props.translationTo;
 
     props.changeTranslateFrom(newTranslateFrom);
-    props.changeTranslateTo(newTranslateTo);
+    props.changeTranslationTo(newTranslationTo);
   };
 
   return (
@@ -26,8 +26,8 @@ const Exam: FC<ExamProps> = (props) => {
       <PageHeader>Check Yourself</PageHeader>
       <Block extraContainerClassName="textBlock">Translate word</Block>
       <LanguageSelector
-        translateFrom={props.translateFrom}
-        translateTo={props.translateTo}
+        translationFrom={props.translationFrom}
+        translationTo={props.translationTo}
         onSwapLanguages={handleSwapLanguages}
       />
     </Page>

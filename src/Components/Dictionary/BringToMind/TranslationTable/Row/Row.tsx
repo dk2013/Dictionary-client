@@ -5,8 +5,8 @@ interface RowProps {
   word: string;
   translation: string;
   masked: string;
-  translateFrom: string;
-  translateTo: string;
+  translationFrom: string;
+  translationTo: string;
 }
 
 const MASK = "---";
@@ -15,10 +15,10 @@ const Row: FC<RowProps> = (props) => {
   return (
     <div className="rowContainer">
       <div className="cell">
-        {props.masked === props.translateFrom ? MASK : props.word}
+        {props.masked === props.translationFrom ? MASK : props.word}
       </div>
       <div className="cell">
-        {props.masked === props.translateTo ? MASK : props.translation}
+        {props.masked === props.translationTo ? MASK : props.translation}
       </div>
     </div>
   );

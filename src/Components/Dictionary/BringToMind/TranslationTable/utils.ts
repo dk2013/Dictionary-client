@@ -6,10 +6,10 @@ export const sort = (
   sortByColumn: string,
   sortByField: fields,
   sortedDictionary: SortedDictionary,
-  translateFrom: string,
-  translateTo: string
+  translationFrom: string,
+  translationTo: string
 ) => {
-  if (sortByColumn === translateFrom) {
+  if (sortByColumn === translationFrom) {
     sortedDictionary.sort((a, b) => {
       if (sortByField === fields.NAME) {
         return (
@@ -19,7 +19,7 @@ export const sort = (
         // default sorting by modified
         return (
           (orderBy === sortOrders.DESC ? -1 : 1) *
-          (a[1][translateTo][0].modified > b[1][translateTo][0].modified
+          (a[1][translationTo][0].modified > b[1][translationTo][0].modified
             ? 1
             : -1)
         );
@@ -30,15 +30,15 @@ export const sort = (
       if (sortByField === fields.NAME) {
         return (
           (orderBy === sortOrders.DESC ? -1 : 1) *
-          a[1][translateTo][0].translation.localeCompare(
-            b[1][translateTo][0].translation
+          a[1][translationTo][0].translation.localeCompare(
+            b[1][translationTo][0].translation
           )
         );
       } else {
         // default sorting by modified
         return (
           (orderBy === sortOrders.DESC ? -1 : 1) *
-          (a[1][translateTo][0].modified > b[1][translateTo][0].modified
+          (a[1][translationTo][0].modified > b[1][translationTo][0].modified
             ? 1
             : -1)
         );

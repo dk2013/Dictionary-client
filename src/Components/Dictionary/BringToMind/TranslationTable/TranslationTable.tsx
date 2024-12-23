@@ -12,8 +12,8 @@ import { sort } from "./utils";
 
 interface TranslationTableProps {
   dictionary: tDictionary;
-  translateFrom: string;
-  translateTo: string;
+  translationFrom: string;
+  translationTo: string;
   onSwapLanguages: () => void;
 }
 
@@ -46,16 +46,16 @@ const TranslationTable: FC<TranslationTableProps> = (props) => {
   let sortedDictionary: SortedDictionary | null = null;
 
   // Sort a dictionary object (convert it to a sorted array)
-  if (props.dictionary && props.translateFrom in props.dictionary) {
-    sortedDictionary = Object.entries(props.dictionary[props.translateFrom]);
+  if (props.dictionary && props.translationFrom in props.dictionary) {
+    sortedDictionary = Object.entries(props.dictionary[props.translationFrom]);
 
     sort(
       orderBy,
       sortByColumn,
       sortByField,
       sortedDictionary,
-      props.translateFrom,
-      props.translateTo
+      props.translationFrom,
+      props.translationTo
     );
   }
 
@@ -94,7 +94,7 @@ const TranslationTable: FC<TranslationTableProps> = (props) => {
       <div className="headerContainer">
         <ColumnHeader
           position={positionColumns.LEFT}
-          language={props.translateFrom}
+          language={props.translationFrom}
           masked={masked}
           onMaskToggle={handleMaskToggle}
           onOrderToggle={handleOrderToggle}
@@ -105,12 +105,12 @@ const TranslationTable: FC<TranslationTableProps> = (props) => {
         />
         <LanguageSelector
           onSwapLanguages={props.onSwapLanguages}
-          translateFrom={props.translateFrom}
-          translateTo={props.translateTo}
+          translationFrom={props.translationFrom}
+          translationTo={props.translationTo}
         />
         <ColumnHeader
           position={positionColumns.RIGHT}
-          language={props.translateTo}
+          language={props.translationTo}
           masked={masked}
           onMaskToggle={handleMaskToggle}
           onOrderToggle={handleOrderToggle}
@@ -126,10 +126,10 @@ const TranslationTable: FC<TranslationTableProps> = (props) => {
             <Row
               key={k}
               word={k}
-              translation={v[props.translateTo]?.[0].translation || ""}
+              translation={v[props.translationTo]?.[0].translation || ""}
               masked={masked}
-              translateFrom={props.translateFrom}
-              translateTo={props.translateTo}
+              translationFrom={props.translationFrom}
+              translationTo={props.translationTo}
             />
           ))}
       </div>

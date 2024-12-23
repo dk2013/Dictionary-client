@@ -7,19 +7,19 @@ import { tDictionary } from "../../../Common/Types/dictionary";
 interface BringToMindProps {
   title?: string;
   dictionary: tDictionary;
-  translateFrom: string;
-  translateTo: string;
+  translationFrom: string;
+  translationTo: string;
   changeTranslateFrom: (v: string) => void;
-  changeTranslateTo: (v: string) => void;
+  changeTranslationTo: (v: string) => void;
 }
 
 const BringToMind: FC<BringToMindProps> = (props) => {
   const handleSwapLanguages = () => {
-    const newTranslateTo = props.translateFrom;
-    const newTranslateFrom = props.translateTo;
+    const newTranslationTo = props.translationFrom;
+    const newTranslateFrom = props.translationTo;
 
     props.changeTranslateFrom(newTranslateFrom);
-    props.changeTranslateTo(newTranslateTo);
+    props.changeTranslationTo(newTranslationTo);
   };
 
   return (
@@ -27,8 +27,8 @@ const BringToMind: FC<BringToMindProps> = (props) => {
       <PageHeader>Bring To Mind</PageHeader>
       <TranslationTable
         dictionary={props.dictionary}
-        translateFrom={props.translateFrom}
-        translateTo={props.translateTo}
+        translationFrom={props.translationFrom}
+        translationTo={props.translationTo}
         onSwapLanguages={handleSwapLanguages}
       />
     </Page>

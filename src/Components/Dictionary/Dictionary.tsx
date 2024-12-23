@@ -25,7 +25,7 @@ const Dictionary: FC = () => {
   const getDictionary = useCallback(async () => {
     try {
       const hardcodedDictionaryId = '6757d9cb74529a16e5bc1396';
-      const result = await fetch(`${BASE_API_URL}/dictionary/${hardcodedDictionaryId}`);
+      const result = await fetch(`${BASE_API_URL}/dictionaries/${hardcodedDictionaryId}`);
       const dictionary: tDictionary = await result.json();
       setDictionary(
         dictionary ?? dictionaryObj
@@ -67,7 +67,7 @@ const Dictionary: FC = () => {
   const saveTranslationToDb = (newWord: string, translation: string, translationFrom: string, translationTo: string) => {
     const hardcodedDictionaryId = '6757d9cb74529a16e5bc1396';
 
-    fetch(`${BASE_API_URL}/dictionary/${hardcodedDictionaryId}/save-translation`, {
+    fetch(`${BASE_API_URL}/dictionaries/${hardcodedDictionaryId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

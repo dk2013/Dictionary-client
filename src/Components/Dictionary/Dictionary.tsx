@@ -103,7 +103,6 @@ const Dictionary: FC = () => {
 
   const handleDeleteTranslation = (
     newWord: string,
-    translation: string,
     translationFrom: string,
     translationTo: string
   ) => {
@@ -111,7 +110,6 @@ const Dictionary: FC = () => {
       const updatedDictionary = deleteAndGetUpdatedDictionary(
         prev,
         newWord,
-        translation,
         translationFrom,
         translationTo
       );

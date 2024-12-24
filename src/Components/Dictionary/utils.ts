@@ -7,16 +7,24 @@ export const saveAndGetUpdatedDictionary = (
   translationFrom: string,
   translationTo: string
 ): tDictionary => {
-  // Save direct translation
-  let updatedDictionary = saveAndGetUpdatedDictionaryObject(
+  // Delete current reversed translation
+  let updatedDictionary = deleteAndGetUpdatedDictionary(
     prevDictionary,
+    newWord,
+    translationFrom,
+    translationTo
+  );
+
+  // Save direct translation
+  updatedDictionary = saveAndGetUpdatedDictionaryObject(
+    updatedDictionary,
     newWord,
     translation,
     translationFrom,
     translationTo
   );
 
-  // Save reverse translation
+  // Save reversed translation
   updatedDictionary = saveAndGetUpdatedDictionaryObject(
     updatedDictionary,
     translation,
@@ -32,24 +40,25 @@ export const saveAndGetUpdatedDictionary = (
 export const deleteAndGetUpdatedDictionary = (
   prevDictionary: tDictionary,
   newWord: string,
-  translation: string,
   translationFrom: string,
   translationTo: string
 ): tDictionary => {
+  const currentTranslation =
+    prevDictionary[translationFrom]?.[newWord]?.[translationTo]?.[0]
+      ?.translation;
+
   // Delete direct translation
   let updatedDictionary = deleteAndGetUpdatedDictionaryObject(
     prevDictionary,
     newWord,
-    // translation,
     translationFrom,
     translationTo
   );
 
-  // Delete reverse translation
+  // Delete reversed translation
   updatedDictionary = deleteAndGetUpdatedDictionaryObject(
     updatedDictionary,
-    translation,
-    // newWord,
+    currentTranslation,
     translationTo,
     translationFrom
   );
@@ -64,7 +73,6 @@ const saveAndGetUpdatedDictionaryObject = (
   translation: string,
   translationFrom: string,
   translationTo: string
-  // modified: Date = new Date()
 ): tDictionary => {
   if (prevDictionary[translationFrom]) {
     if (prevDictionary[translationFrom]?.[newWord]) {
@@ -122,7 +130,6 @@ const saveAndGetUpdatedDictionaryObject = (
 const deleteAndGetUpdatedDictionaryObject = (
   prevDictionary: tDictionary,
   newWord: string,
-  // translation: string,
   translationFrom: string,
   translationTo: string
 ): tDictionary => {
@@ -132,12 +139,10 @@ const deleteAndGetUpdatedDictionaryObject = (
     updatedDictionary?.[translationFrom]?.[newWord]?.[translationTo]?.[0] // TODO: For now we operate just the first element of translation array
       ?.translation
   ) {
-    delete updatedDictionary?.[translationFrom]?.[newWord]?.[translationTo]?.[0]; // TODO: For now we operate just the first element of translation array
+    delete updatedDictionary?.[translationFrom]?.[newWord]?.[translationTo]; // TODO: For now we operate just the first element of translation array
 
     if (
-      !Object.keys(
-        updatedDictionary[translationFrom]?.[newWord].translation || {}
-      ).length
+      !Object.keys(updatedDictionary[translationFrom]?.[newWord] || {}).length
     ) {
       delete updatedDictionary[translationFrom]?.[newWord];
     }

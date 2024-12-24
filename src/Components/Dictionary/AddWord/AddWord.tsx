@@ -80,6 +80,8 @@ const AddWord: FC<AddWordProps> = (props) => {
   };
 
   const handleSave = () => {
+    if(translationExists) return;
+
     props.onSaveTranslation(
       newWord,
       translation,

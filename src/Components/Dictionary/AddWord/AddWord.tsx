@@ -21,7 +21,6 @@ interface AddWordProps {
   ) => void;
   onDeleteTranslation: (
     newWord: string,
-    translation: string,
     translationFrom: string,
     translationTo: string
   ) => void;
@@ -80,6 +79,8 @@ const AddWord: FC<AddWordProps> = (props) => {
   };
 
   const handleSave = () => {
+    if(translationExists) return;
+
     props.onSaveTranslation(
       newWord,
       translation,
@@ -107,7 +108,6 @@ const AddWord: FC<AddWordProps> = (props) => {
   const handleDelete = () => {
     props.onDeleteTranslation(
       newWord,
-      translation,
       props.translationFrom,
       props.translationTo
     );

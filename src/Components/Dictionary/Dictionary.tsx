@@ -19,17 +19,19 @@ const BASE_API_URL = "http://localhost:8000";
 
 const Dictionary: FC = () => {
   const [dictionary, setDictionary] = useState<tDictionary>(dictionaryObj);
-  const [translationFrom, setTranslateFrom] = useState<string>(languageCodes.ENG);
+  const [translationFrom, setTranslateFrom] = useState<string>(
+    languageCodes.ENG
+  );
   const [translationTo, setTranslationTo] = useState<string>(languageCodes.RUS);
 
   const getDictionary = useCallback(async () => {
     try {
-      const hardcodedDictionaryId = '6757d9cb74529a16e5bc1396';
-      const result = await fetch(`${BASE_API_URL}/dictionaries/${hardcodedDictionaryId}`);
-      const dictionary: tDictionary = await result.json();
-      setDictionary(
-        dictionary ?? dictionaryObj
+      const hardcodedDictionaryId = "6757d9cb74529a16e5bc1396";
+      const result = await fetch(
+        `${BASE_API_URL}/dictionaries/${hardcodedDictionaryId}`
       );
+      const dictionary: tDictionary = await result.json();
+      setDictionary(dictionary ?? dictionaryObj);
     } catch (error) {
       console.error("Error fetching dictionary:", error);
     }
@@ -57,28 +59,61 @@ const Dictionary: FC = () => {
         );
 
         saveDictionaryToStorage("dictionary", updatedDictionary);
-        saveTranslationToDb(newWord, translation, translationFrom, translationTo);
+        saveTranslationToDb(
+          newWord,
+          translation,
+          translationFrom,
+          translationTo
+        );
 
         return updatedDictionary;
       });
     }
   };
 
-  const saveTranslationToDb = (newWord: string, translation: string, translationFrom: string, translationTo: string) => {
-    const hardcodedDictionaryId = '6757d9cb74529a16e5bc1396';
-
-    fetch(`${BASE_API_URL}/dictionaries/${hardcodedDictionaryId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+  const handleDeleteTranslation = (
+    newWord: string,
+    translationFrom: string,
+    translationTo: string
+  ) => {
+    setDictionary((prev) => {
+      const updatedDictionary = deleteAndGetUpdatedDictionary(
+        prev,
         newWord,
-        translation,
         translationFrom,
         translationTo
-      }),
-    })
+      );
+
+      saveDictionaryToStorage("dictionary", updatedDictionary);
+      deleteTranslationFromDb(newWord, translationFrom, translationTo);
+
+      return updatedDictionary;
+    });
+  };
+
+  const saveTranslationToDb = (
+    newWord: string,
+    translation: string,
+    translationFrom: string,
+    translationTo: string
+  ) => {
+    const hardcodedDictionaryId = "6757d9cb74529a16e5bc1396";
+
+    fetch(
+      `${BASE_API_URL}/dictionaries/${hardcodedDictionaryId}/translations`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          newWord,
+          translation,
+          translationFrom,
+          translationTo,
+        }),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
@@ -86,7 +121,32 @@ const Dictionary: FC = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }
+  };
+
+  const deleteTranslationFromDb = (
+    newWord: string,
+    translationFrom: string,
+    translationTo: string
+  ) => {
+    const hardcodedDictionaryId = "6757d9cb74529a16e5bc1396";
+
+    fetch(
+      `${BASE_API_URL}/dictionaries/${hardcodedDictionaryId}/translations?newWord=${newWord}&translationFrom=${translationFrom}&translationTo=${translationTo}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
   const saveDictionaryToStorage = (
     key: string,
@@ -99,27 +159,6 @@ const Dictionary: FC = () => {
     } catch (e) {
       console.error(e);
     }
-  };
-
-  const handleDeleteTranslation = (
-    newWord: string,
-    translation: string,
-    translationFrom: string,
-    translationTo: string
-  ) => {
-    setDictionary((prev) => {
-      const updatedDictionary = deleteAndGetUpdatedDictionary(
-        prev,
-        newWord,
-        translation,
-        translationFrom,
-        translationTo
-      );
-
-      saveDictionaryToStorage("dictionary", updatedDictionary);
-
-      return updatedDictionary;
-    });
   };
 
   return (

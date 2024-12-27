@@ -15,7 +15,7 @@ import {
   deleteAndGetUpdatedDictionary,
 } from "./utils";
 
-const BASE_API_URL = "http://localhost:8000";
+const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const Dictionary: FC = () => {
   const [dictionary, setDictionary] = useState<tDictionary>(dictionaryObj);
@@ -28,7 +28,7 @@ const Dictionary: FC = () => {
     try {
       const hardcodedDictionaryId = "6757d9cb74529a16e5bc1396";
       const result = await fetch(
-        `${BASE_API_URL}/dictionaries/${hardcodedDictionaryId}`
+        `${REACT_APP_SERVER_URL}/dictionaries/${hardcodedDictionaryId}`
       );
       const dictionary: tDictionary = await result.json();
       setDictionary(dictionary ?? dictionaryObj);
@@ -100,7 +100,7 @@ const Dictionary: FC = () => {
     const hardcodedDictionaryId = "6757d9cb74529a16e5bc1396";
 
     fetch(
-      `${BASE_API_URL}/dictionaries/${hardcodedDictionaryId}/translations`,
+      `${REACT_APP_SERVER_URL}/dictionaries/${hardcodedDictionaryId}/translations`,
       {
         method: "POST",
         headers: {
@@ -131,7 +131,7 @@ const Dictionary: FC = () => {
     const hardcodedDictionaryId = "6757d9cb74529a16e5bc1396";
 
     fetch(
-      `${BASE_API_URL}/dictionaries/${hardcodedDictionaryId}/translations?newWord=${newWord}&translationFrom=${translationFrom}&translationTo=${translationTo}`,
+      `${REACT_APP_SERVER_URL}/dictionaries/${hardcodedDictionaryId}/translations?newWord=${newWord}&translationFrom=${translationFrom}&translationTo=${translationTo}`,
       {
         method: "DELETE",
         headers: {

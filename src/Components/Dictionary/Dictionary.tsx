@@ -14,6 +14,14 @@ import {
   saveAndGetUpdatedDictionary,
   deleteAndGetUpdatedDictionary,
 } from "./utils";
+import fetchUser from "../../Utils/auth";
+
+interface User {
+  _id: string;
+  googleId: number;
+  displayName: string;
+  email: string;
+}
 
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -23,12 +31,14 @@ const Dictionary: FC = () => {
     languageCodes.ENG
   );
   const [translationTo, setTranslationTo] = useState<string>(languageCodes.RUS);
+  const [user, setUser] = useState<User | null>(null);
 
-  const getDictionary = useCallback(async () => {
+  console.log("user", user);
+
+  const getDictionary = useCallback(async (userId: string) => {
     try {
-      const hardcodedDictionaryId = "6757d9cb74529a16e5bc1396";
       const result = await fetch(
-        `${REACT_APP_SERVER_URL}/dictionaries/${hardcodedDictionaryId}`
+        `${REACT_APP_SERVER_URL}/dictionaries/users/${userId}`
       );
       const dictionary: tDictionary = await result.json();
       setDictionary(dictionary ?? dictionaryObj);
@@ -38,8 +48,17 @@ const Dictionary: FC = () => {
   }, []);
 
   useEffect(() => {
-    getDictionary();
-  }, [getDictionary]);
+    async function getUser() {
+      const userData = await fetchUser();
+      setUser(userData);
+    }
+
+    getUser();
+  }, []);
+
+  useEffect(() => {
+    if (user?._id) getDictionary(user._id);
+  }, [getDictionary, user]);
 
   const handleSaveTranslation = (
     newWord: string,

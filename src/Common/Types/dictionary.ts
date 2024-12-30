@@ -28,4 +28,10 @@ type Entries<T> = {
   [K in keyof T]: [K, T[K]];
 }[keyof T][];
 
+export type DictionaryObj = {
+  id: string;
+  user_id: string;
+  dictionary: tDictionary;
+};
+
 export type SortedDictionary = Entries<Words>;

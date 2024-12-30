@@ -5,7 +5,7 @@ import { AddWord } from "./AddWord";
 import { BringToMind } from "./BringToMind";
 import { Exam } from "./Exam";
 import { Settings } from "./Settings";
-import { tDictionary } from "../../Common/Types/dictionary";
+import { DictionaryObj, tDictionary } from "../../Common/Types/dictionary";
 import {
   dictionaryObj,
   languageCodes,
@@ -14,32 +14,47 @@ import {
   saveAndGetUpdatedDictionary,
   deleteAndGetUpdatedDictionary,
 } from "./utils";
+import fetchUser from "../../Utils/auth";
+import { User } from "../../Interfaces/user";
 
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const Dictionary: FC = () => {
-  const [dictionary, setDictionary] = useState<tDictionary>(dictionaryObj);
+  const [dictionary, setDictionary] = useState<tDictionary>(
+    dictionaryObj.dictionary
+  );
   const [translationFrom, setTranslateFrom] = useState<string>(
     languageCodes.ENG
   );
   const [translationTo, setTranslationTo] = useState<string>(languageCodes.RUS);
+  const [user, setUser] = useState<User | null>(null);
+  const [dictionaryId, setDictionaryId] = useState<string | null>(null);
 
-  const getDictionary = useCallback(async () => {
+  const getDictionary = useCallback(async (userId: string) => {
     try {
-      const hardcodedDictionaryId = "6757d9cb74529a16e5bc1396";
       const result = await fetch(
-        `${REACT_APP_SERVER_URL}/dictionaries/${hardcodedDictionaryId}`
+        `${REACT_APP_SERVER_URL}/dictionaries/users/${userId}`
       );
-      const dictionary: tDictionary = await result.json();
-      setDictionary(dictionary ?? dictionaryObj);
-    } catch (error) {
-      console.error("Error fetching dictionary:", error);
+      const dictionaryObjFromDb: DictionaryObj = await result.json();
+      setDictionary(dictionaryObjFromDb.dictionary ?? dictionaryObj.dictionary);
+      setDictionaryId(dictionaryObjFromDb.id ?? null);
+    } catch (e) {
+      console.error("Error fetching dictionary:", e);
     }
   }, []);
 
   useEffect(() => {
-    getDictionary();
-  }, [getDictionary]);
+    async function getUser() {
+      const userData: User = await fetchUser();
+      setUser(userData);
+    }
+
+    getUser();
+  }, []);
+
+  useEffect(() => {
+    if (user?.id) getDictionary(user.id);
+  }, [getDictionary, user]);
 
   const handleSaveTranslation = (
     newWord: string,
@@ -97,29 +112,26 @@ const Dictionary: FC = () => {
     translationFrom: string,
     translationTo: string
   ) => {
-    const hardcodedDictionaryId = "6757d9cb74529a16e5bc1396";
+    if (!dictionaryId) return;
 
-    fetch(
-      `${REACT_APP_SERVER_URL}/dictionaries/${hardcodedDictionaryId}/translations`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          newWord,
-          translation,
-          translationFrom,
-          translationTo,
-        }),
-      }
-    )
+    fetch(`${REACT_APP_SERVER_URL}/dictionaries/${dictionaryId}/translations`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        newWord,
+        translation,
+        translationFrom,
+        translationTo,
+      }),
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
       })
-      .catch((error) => {
-        console.error("Error:", error);
+      .catch((e) => {
+        console.error("Error:", e);
       });
   };
 
@@ -128,10 +140,10 @@ const Dictionary: FC = () => {
     translationFrom: string,
     translationTo: string
   ) => {
-    const hardcodedDictionaryId = "6757d9cb74529a16e5bc1396";
+    if (!dictionaryId) return;
 
     fetch(
-      `${REACT_APP_SERVER_URL}/dictionaries/${hardcodedDictionaryId}/translations?newWord=${newWord}&translationFrom=${translationFrom}&translationTo=${translationTo}`,
+      `${REACT_APP_SERVER_URL}/dictionaries/${dictionaryId}/translations?newWord=${newWord}&translationFrom=${translationFrom}&translationTo=${translationTo}`,
       {
         method: "DELETE",
         headers: {
@@ -143,8 +155,8 @@ const Dictionary: FC = () => {
       .then((data) => {
         console.log("Success:", data);
       })
-      .catch((error) => {
-        console.error("Error:", error);
+      .catch((e) => {
+        console.error("Error:", e);
       });
   };
 

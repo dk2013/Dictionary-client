@@ -16,10 +16,14 @@ import {
 } from "./utils";
 import fetchUser from "../../Utils/auth";
 import { User } from "../../Interfaces/user";
+import { useDispatch } from "react-redux";
+import { setUser as setUserInStore } from "../../userSlice";
 
 const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 const Dictionary: FC = () => {
+  const dispatch = useDispatch();
+
   const [dictionary, setDictionary] = useState<tDictionary>(
     dictionaryObj.dictionary
   );
@@ -47,10 +51,11 @@ const Dictionary: FC = () => {
     async function getUser() {
       const userData: User = await fetchUser();
       setUser(userData);
+      dispatch(setUserInStore(userData));
     }
 
     getUser();
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (user?.id) getDictionary(user.id);

@@ -1,6 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 
-const Login = ({ username = "Guest" }) => {
+interface LoginProps {
+  username?: string;
+}
+
+const Login: FC<LoginProps> = ({ username = "Guest" }) => {
   return (
     <div>
       <span>{username}</span>{" "}

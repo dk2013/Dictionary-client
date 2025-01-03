@@ -12,9 +12,13 @@ const Login: FC<LoginProps> = ({ username = "Guest" }) => {
   return (
     <div>
       <span>{user?.displayName || "Guest"}</span>{" "}
-      <a href={`${process.env.REACT_APP_SERVER_URL}/auth/google`}>
-        Login with Google
-      </a>
+      {!user ? (
+        <a href={`${process.env.REACT_APP_SERVER_URL}/auth/google`}>
+          Login with Google
+        </a>
+      ) : (
+        <a href={`${process.env.REACT_APP_SERVER_URL}/auth/logout`}>Logout</a>
+      )}
     </div>
   );
 };

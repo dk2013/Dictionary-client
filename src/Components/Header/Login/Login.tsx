@@ -2,11 +2,7 @@ import React, { FC } from "react";
 import { useAppSelector } from "../../../Hooks/store";
 import { User } from "../../../Interfaces/user";
 
-interface LoginProps {
-  username?: string;
-}
-
-const Login: FC<LoginProps> = ({ username = "Guest" }) => {
+const Login: FC = () => {
   const user: User | null = useAppSelector((state) => state.user.user);
 
   return (

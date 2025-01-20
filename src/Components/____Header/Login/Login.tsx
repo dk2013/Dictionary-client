@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useAppSelector } from "../../../Hooks/store";
-import { User } from "../../../Interfaces/user";
+import { User } from "../../../Types/user";
 
 const Login: FC = () => {
   const user: User | null = useAppSelector((state) => state.user.user);

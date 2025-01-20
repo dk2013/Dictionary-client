@@ -1,4 +1,4 @@
-import { User } from "./Interfaces/user";
+import { User } from "./Types/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {

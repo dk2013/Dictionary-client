@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Dictionary web application" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <meta charset="UTF-8" />
+    <title>Fancy Dictionary App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <title>Dictionary</title>
 
     <style>
       /* RESET */
@@ -454,14 +451,13 @@
       /* Full-width Buttons */
       .btn-full-width {
         display: block;
-        width: 60%;
-        margin: 10px auto;
+        width: 100%;
+        margin: 10px 0;
         text-align: center;
         background: linear-gradient(135deg, #f093fb, #f5576c);
         color: #fff;
         font-weight: bold;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-        text-decoration: none;
       }
 
       .btn-full-width:hover {
@@ -472,8 +468,194 @@
   <body>
     <!-- PAGE WRAPPER -->
     <div class="page-wrapper">
-      <noscript>You need to enable JavaScript to run this app.</noscript>
-      <div id="root"></div>
+      <!-- HEADER -->
+      <header>
+        <!-- Burger Icon -->
+        <div class="burger-icon" id="burger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <h1 class="app-title">Fancy Dictionary</h1>
+
+        <!-- Profile Icon -->
+        <div class="profile-icon" id="profile-icon">
+          <img
+            src="https://via.placeholder.com/34/666/fff?text=Me"
+            alt="Profile"
+          />
+        </div>
+      </header>
+
+      <!-- LEFT MENU -->
+      <nav id="side-menu-left" class="side-menu">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#history">History</a></li>
+          <li><a href="#words">Words</a></li>
+        </ul>
+      </nav>
+
+      <!-- RIGHT MENU -->
+      <nav id="side-menu-right" class="side-menu">
+        <ul>
+          <li><a href="#favorites">Favorites</a></li>
+          <li><a href="#settings">Settings</a></li>
+          <li><a href="#logout">Logout</a></li>
+        </ul>
+      </nav>
+
+      <!-- MAIN CONTENT -->
+      <main>
+        <div class="content-title">Welcome to Fancy Dictionary</div>
+        <p class="content-description">
+          This version of the dictionary app includes a playful gradient, a
+          custom Google font, pastel side menus, and a range of fancy controls
+          below. We’ve added a select, input, table, buttons, radio, toggle, and
+          a range slider—all in a fun pastel style.
+        </p>
+
+        <!-- Buttons Section -->
+        <div class="button-section">
+          <button class="styled-btn btn-full-width">Add Word</button>
+          <button class="styled-btn btn-full-width">Bring to Mind</button>
+          <button class="styled-btn btn-full-width">Check Yourself</button>
+        </div>
+
+        <div class="content-placeholder">
+          <p>Some example dictionary content or instructions here...</p>
+        </div>
+
+        <!-- FANCY CONTROLS -->
+        <div class="fancy-controls">
+          <h3>Fancy Controls</h3>
+
+          <!-- Radio Group -->
+          <div class="radio-group">
+            <label
+              ><input
+                type="radio"
+                name="exampleRadio"
+                value="Option1"
+                checked
+              />
+              Option 1</label
+            >
+            <label
+              ><input type="radio" name="exampleRadio" value="Option2" /> Option
+              2</label
+            >
+            <label
+              ><input type="radio" name="exampleRadio" value="Option3" /> Option
+              3</label
+            >
+          </div>
+
+          <!-- Toggle Switch -->
+          <div class="toggle-row">
+            <label for="toggleSwitch">Toggle Something:</label>
+            <div class="toggle-switch">
+              <input type="checkbox" id="toggleSwitch" />
+              <span class="slider"></span>
+            </div>
+          </div>
+
+          <!-- Range Slider -->
+          <div class="range-row">
+            <label for="volumeRange">Volume:</label>
+            <input
+              type="range"
+              id="volumeRange"
+              class="styled-range"
+              min="0"
+              max="100"
+              value="50"
+            />
+          </div>
+
+          <!-- Additional Controls: SELECT, INPUT, BUTTONS -->
+          <div class="control-row">
+            <label for="fancySelect">Select Option:</label>
+            <select id="fancySelect" class="styled-select">
+              <option value="">-- Please choose --</option>
+              <option>Option A</option>
+              <option>Option B</option>
+              <option>Option C</option>
+            </select>
+          </div>
+
+          <div class="control-row">
+            <label for="fancyInput">Fancy Input:</label>
+            <input
+              type="text"
+              id="fancyInput"
+              class="styled-input"
+              placeholder="Type something..."
+            />
+          </div>
+
+          <div class="control-row">
+            <button class="styled-btn">Plain Button</button>
+
+            <button class="icon-btn">
+              <img
+                src="https://via.placeholder.com/16/666/fff?text=I"
+                alt="Icon"
+                class="btn-icon"
+              />
+              Button with Icon
+            </button>
+          </div>
+
+          <!-- Table Example -->
+          <div class="table-container">
+            <table class="styled-table">
+              <thead>
+                <tr>
+                  <th>Column A</th>
+                  <th>Column B</th>
+                  <th>Column C</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Row1-A</td>
+                  <td>Row1-B</td>
+                  <td>Row1-C</td>
+                </tr>
+                <tr>
+                  <td>Row2-A</td>
+                  <td>Row2-B</td>
+                  <td>Row2-C</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- End fancy controls -->
+      </main>
     </div>
+
+    <script>
+      const burgerIcon = document.getElementById("burger-icon");
+      const profileIcon = document.getElementById("profile-icon");
+      const sideMenuLeft = document.getElementById("side-menu-left");
+      const sideMenuRight = document.getElementById("side-menu-right");
+
+      // Toggle left side menu
+      burgerIcon.addEventListener("click", () => {
+        sideMenuLeft.classList.toggle("active");
+        // Optionally close the right menu if open
+        // sideMenuRight.classList.remove("active");
+      });
+
+      // Toggle right side menu
+      profileIcon.addEventListener("click", () => {
+        sideMenuRight.classList.toggle("active");
+        // Optionally close the left menu if open
+        // sideMenuLeft.classList.remove("active");
+      });
+    </script>
   </body>
 </html>

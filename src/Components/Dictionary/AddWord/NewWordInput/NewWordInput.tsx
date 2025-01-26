@@ -9,10 +9,11 @@ interface NewWordInputProps {
 
 const NewWordInput: FC<NewWordInputProps> = (props) => {
   return (
-    <div className="inputContainer">
+    <div className="control-row centered">
       <input
-        className="input"
+        className="styled-input add-word-input"
         value={props.value}
+        placeholder="Enter English word..."
         onChange={(e) => props.onNewWordChange(e.target.value)}
         onKeyDown={(e) => props.onKeyDown(e.key)}
       />

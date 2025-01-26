@@ -226,18 +226,30 @@
       }
 
       .fancy-controls h3 {
-        margin-bottom: 10px;
+        margin-bottom: 2rem;
         color: #333;
         font-family: "Quicksand", sans-serif;
         font-weight: 600;
-        font-size: 1.2em;
+        font-size: 2rem;
+        text-align: center;
+      }
+      /* Spacing around the "Fancy Controls" section */
+
+      /* Centered control-row items */
+      .control-row.centered {
+        justify-content: center; /* from inline style="justify-content: center" */
+      }
+
+      /* Extra spacing above buttons */
+      .btn-spacing {
+        margin-top: 8px; /* from inline style="margin-top: 8px" */
       }
 
       /* CONTROL ROWS */
       .control-row {
         display: flex;
         align-items: center;
-        margin-bottom: 12px;
+        margin-bottom: 1rem;
         flex-wrap: wrap;
       }
 
@@ -384,6 +396,10 @@
         border-color: #999;
       }
 
+      .add-word-input {
+        width: 40%;
+      }
+
       /* 5) BUTTONS */
       .styled-btn,
       .icon-btn {
@@ -400,9 +416,47 @@
         align-items: center;
       }
 
-      .styled-btn:hover,
+      .fancy-btn {
+        display: block;
+        width: 40%;
+        margin: 10px auto;
+        text-align: center;
+        background: linear-gradient(135deg, #f093fb, #f5576c);
+        color: #fff;
+        font-weight: bold;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        text-decoration: none;
+      }
+
+      .fancy-btn:hover {
+        background: linear-gradient(135deg, #f5576c, #f093fb);
+        transform: scale(1.02);
+      }
+
+      .icon-btn:disabled,
+      .styled-btn:disabled {
+        background: #e0e0e0; /* Light gray background */
+        color: #aaa; /* Muted text color */
+        cursor: not-allowed; /* Show disabled cursor */
+        box-shadow: none; /* Remove shadow for disabled buttons */
+        opacity: 0.5;
+      }
+
+      .icon-btn:disabled:hover,
+      .styled-btn:disabled:hover {
+        /*background: inherit; !* Reset background to the original disabled state *!*/
+        background-color: #e0e0e0;
+        /*color: inherit; !* Reset text color to the original disabled state *!*/
+        color: #aaa; /* Muted text color */
+        transform: none; /* Disable any hover-related transform effects */
+        box-shadow: none; /* Remove hover shadow */
+        /*opacity: 0.5;*/
+      }
+
+      /*.styled-btn:hover,*/
       .icon-btn:hover {
         background: #fda085;
+        transform: scale(1.02);
       }
 
       .styled-btn:active,
@@ -451,21 +505,14 @@
         background: #fafafa;
       }
 
-      /* Full-width Buttons */
-      .btn-full-width {
-        display: block;
-        width: 60%;
-        margin: 10px auto;
-        text-align: center;
-        background: linear-gradient(135deg, #f093fb, #f5576c);
-        color: #fff;
-        font-weight: bold;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-        text-decoration: none;
+      .width-40 {
+        width: 40%;
       }
-
-      .btn-full-width:hover {
-        background: linear-gradient(135deg, #f5576c, #f093fb);
+      .width-50 {
+        width: 50%;
+      }
+      .width-80 {
+        width: 80%;
       }
     </style>
   </head>

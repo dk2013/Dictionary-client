@@ -20,17 +20,20 @@ const Dashboard: FC<DashboardProps> = (props) => {
 
       <div className="button-section">
         <div>
-          <NavLink className="styled-btn btn-full-width" to="/add-word">
+          <NavLink className="styled-btn fancy-btn width-80" to="/add-word">
             Add Word
           </NavLink>
         </div>
         <div>
-          <NavLink className="styled-btn btn-full-width" to="/bring-to-mind">
+          <NavLink
+            className="styled-btn fancy-btn width-80"
+            to="/bring-to-mind"
+          >
             Bring To Mind
           </NavLink>
         </div>
         <div>
-          <NavLink className="styled-btn btn-full-width" to="/exam">
+          <NavLink className="styled-btn fancy-btn width-80" to="/exam">
             Check Yourself
           </NavLink>
         </div>

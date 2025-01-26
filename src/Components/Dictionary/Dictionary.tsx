@@ -15,7 +15,7 @@ import {
   deleteAndGetUpdatedDictionary,
 } from "./utils";
 import fetchUser from "../../Utils/auth";
-import { User } from "../../Interfaces/user";
+import { User } from "../../Types/user";
 import { useDispatch } from "react-redux";
 import { setUser as setUserInStore } from "../../userSlice";
 

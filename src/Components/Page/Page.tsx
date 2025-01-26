@@ -1,6 +1,7 @@
 import { FC, ReactNode, useEffect } from "react";
 import "./styles.scss";
-import { Header } from "../Header";
+// import { ____Header } from "../____Header";
+import { HeaderAndNav } from "../HeaderAndNav";
 
 interface PageProps {
   children: ReactNode;
@@ -18,10 +19,14 @@ const Page: FC<PageProps> = (props) => {
   }, [props.title]);
 
   return (
-    <main>
-      <Header />
-      <section className="content">{props.children}</section>
-    </main>
+    <>
+      <HeaderAndNav />
+      <main>
+        {/*<____Header />*/}
+
+        <section className="content">{props.children}</section>
+      </main>
+    </>
   );
 };
 

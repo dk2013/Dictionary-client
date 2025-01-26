@@ -1,4 +1,6 @@
-export const routes = [
+import { IRoute } from "../Types/route";
+
+export const appRoutes: IRoute[] = [
   {
     path: "/",
     name: "Dashboard",
@@ -14,5 +16,22 @@ export const routes = [
   {
     path: "/exam",
     name: "Check Yourself",
+  },
+];
+
+export const profileRoutes: IRoute[] = [
+  {
+    path: "/settings",
+    name: "Settings",
+  },
+  {
+    path: `${process.env.REACT_APP_SERVER_URL}/auth/google`,
+    name: "Login",
+    external: true,
+  },
+  {
+    path: `${process.env.REACT_APP_SERVER_URL}/auth/logout`,
+    name: "Logout",
+    external: true,
   },
 ];

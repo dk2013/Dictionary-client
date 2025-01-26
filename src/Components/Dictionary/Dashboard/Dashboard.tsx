@@ -10,15 +10,32 @@ interface DashboardProps {
 const Dashboard: FC<DashboardProps> = (props) => {
   return (
     <Page title={props.title}>
-      <div className="dashboard">
-        <div className="row borderBottom">
-          <NavLink to="/add-word">Add Word</NavLink>
+      <div className="content-title">Welcome to Fancy Dictionary</div>
+      <p className="content-description">
+        This version of the dictionary app includes a playful gradient, a custom
+        Google font, pastel side menus, and a range of fancy controls below.
+        We’ve added a select, input, table, buttons, radio, toggle, and a range
+        slider—all in a fun pastel style.
+      </p>
+
+      <div className="button-section">
+        <div>
+          <NavLink className="styled-btn fancy-btn width-80" to="/add-word">
+            Add Word
+          </NavLink>
         </div>
-        <div className="row halfRow">
-          <NavLink to="/bring-to-mind">Bring To Mind</NavLink>
+        <div>
+          <NavLink
+            className="styled-btn fancy-btn width-80"
+            to="/bring-to-mind"
+          >
+            Bring To Mind
+          </NavLink>
         </div>
-        <div className="row halfRow borderLeft">
-          <NavLink to="/exam">Check Yourself</NavLink>
+        <div>
+          <NavLink className="styled-btn fancy-btn width-80" to="/exam">
+            Check Yourself
+          </NavLink>
         </div>
       </div>
     </Page>

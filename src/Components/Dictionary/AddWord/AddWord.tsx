@@ -1,12 +1,11 @@
 import { FC, useEffect, useState, useCallback } from "react";
 import { Page } from "../../Page";
 import { LanguageSelector } from "../../../Common/Components/LanguageSelector";
-import { PageHeader } from "../../../Common/Components/PageHeader";
 import { NewWordInput } from "./NewWordInput";
 import { TranslationInput } from "./TranslationInput";
 import { Button } from "../../../Common/Components/Button";
 import { tDictionary } from "../../../Common/Types/dictionary";
-import { AiOutlineDelete } from "react-icons/ai";
+import { PageHeader } from "../../../Common/Components/PageHeader";
 
 interface AddWordProps {
   title?: string;
@@ -79,7 +78,7 @@ const AddWord: FC<AddWordProps> = (props) => {
   };
 
   const handleSave = () => {
-    if(translationExists) return;
+    if (translationExists) return;
 
     props.onSaveTranslation(
       newWord,
@@ -118,38 +117,43 @@ const AddWord: FC<AddWordProps> = (props) => {
 
   return (
     <Page title={props.title}>
-      <PageHeader>Add Word</PageHeader>
-      <LanguageSelector
-        translationFrom={props.translationFrom}
-        translationTo={props.translationTo}
-        onSwapLanguages={handleSwapLanguages}
-      />
-      <NewWordInput
-        value={newWord}
-        onNewWordChange={(v: string) => handleNewWordChange(v)}
-        onKeyDown={handleKeyDown}
-      />
-      <Button
-        onSave={handleDelete}
-        disabled={!newWord || !translation || !translationExists}
-      >
-        <AiOutlineDelete></AiOutlineDelete>
-      </Button>
-      <TranslationInput
-        value={translation}
-        onTranslationChange={(v: string) => handleTranslationChange(v)}
-        onKeyDown={handleKeyDown}
-      />
-      <Button
-        onSave={handleSave}
-        disabled={!newWord || !translation || translationExists}
-      >
-        Save translation
-      </Button>
-      <button onClick={() => console.log(props.dictionary)}>
-        {/*The button for the debug purpose */}
-        show dictionary
-      </button>
+      <div className="fancy-controls">
+        <PageHeader>Add Word</PageHeader>
+        <LanguageSelector
+          translationFrom={props.translationFrom}
+          translationTo={props.translationTo}
+          onSwapLanguages={handleSwapLanguages}
+        />
+        <NewWordInput
+          value={newWord}
+          onNewWordChange={(v: string) => handleNewWordChange(v)}
+          onKeyDown={handleKeyDown}
+        />
+        <Button
+          onSave={handleDelete}
+          disabled={!newWord || !translation || !translationExists}
+        >
+          {/*<AiOutlineDelete></AiOutlineDelete>*/}
+          🗑️Clear
+        </Button>
+        <TranslationInput
+          value={translation}
+          onTranslationChange={(v: string) => handleTranslationChange(v)}
+          onKeyDown={handleKeyDown}
+        />
+        <Button
+          type={"fancy"}
+          onSave={handleSave}
+          disabled={!newWord || !translation || translationExists}
+        >
+          Save translation
+        </Button>
+
+        <button onClick={() => console.log(props.dictionary)}>
+          {/*The button for the debug purpose */}
+          show dictionary
+        </button>
+      </div>
     </Page>
   );
 };

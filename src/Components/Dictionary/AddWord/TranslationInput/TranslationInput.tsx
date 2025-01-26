@@ -9,10 +9,11 @@ interface TranslationProps {
 
 const TranslationInput: FC<TranslationProps> = (props) => {
   return (
-    <div className="inputContainer">
+    <div className="control-row centered">
       <input
-        className="input"
+        className="styled-input add-word-input"
         value={props.value}
+        placeholder="Enter Russian translation..."
         onChange={(e) => props.onTranslationChange(e.target.value)}
         onKeyDown={(e) => props.onKeyDown(e.key)}
       />

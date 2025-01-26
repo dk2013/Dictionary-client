@@ -1,9 +1,14 @@
 import { FC, useState } from "react";
-import { routes } from "../../../Router/routes";
+// import { routes } from "../../../Router/routes";
 import { NavLink } from "react-router-dom";
-import "./styles.scss";
+import "./Header.module.scss";
+import { IRoute } from "../../../Types/route";
 
-const Nav: FC = () => {
+interface INavProps {
+  routes: IRoute[];
+}
+
+const Nav: FC<INavProps> = ({ routes }) => {
   const [menuActive, setMenuActive] = useState(false);
   return (
     <>

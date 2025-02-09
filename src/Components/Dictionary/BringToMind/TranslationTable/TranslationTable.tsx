@@ -90,37 +90,51 @@ const TranslationTable: FC<TranslationTableProps> = (props) => {
   };
 
   return (
-    <div className="tableContainer">
-      <div className="headerContainer">
-        <ColumnHeader
-          position={positionColumns.LEFT}
-          language={props.translationFrom}
-          masked={masked}
-          onMaskToggle={handleMaskToggle}
-          onOrderToggle={handleOrderToggle}
-          sortByColumn={sortByColumn}
-          sortByField={sortByField}
-          orderBy={orderBy}
-          onSortByFieldChange={handleSortByFieldChange}
-        />
-        <LanguageSelector
-          onSwapLanguages={props.onSwapLanguages}
-          translationFrom={props.translationFrom}
-          translationTo={props.translationTo}
-        />
-        <ColumnHeader
-          position={positionColumns.RIGHT}
-          language={props.translationTo}
-          masked={masked}
-          onMaskToggle={handleMaskToggle}
-          onOrderToggle={handleOrderToggle}
-          sortByColumn={sortByColumn}
-          sortByField={sortByField}
-          orderBy={orderBy}
-          onSortByFieldChange={handleSortByFieldChange}
-        />
-      </div>
-      <div className="bodyContainer">
+    <table className="fancy-styled-table">
+      <thead>
+        <tr>
+          <th colSpan={2}>
+            <div className="fancy-styled-table-header">
+              <div>
+                <ColumnHeader
+                  position={positionColumns.LEFT}
+                  language={props.translationFrom}
+                  masked={masked}
+                  onMaskToggle={handleMaskToggle}
+                  onOrderToggle={handleOrderToggle}
+                  sortByColumn={sortByColumn}
+                  sortByField={sortByField}
+                  orderBy={orderBy}
+                  onSortByFieldChange={handleSortByFieldChange}
+                />
+              </div>
+              <div className="language-selector-container">
+                <LanguageSelector
+                  onSwapLanguages={props.onSwapLanguages}
+                  translationFrom={props.translationFrom}
+                  translationTo={props.translationTo}
+                />
+              </div>
+              {/*</th>*/}
+              {/*<th className="fancy-styled-column-header">*/}
+              <div className="right-column">
+                <ColumnHeader
+                  position={positionColumns.RIGHT}
+                  language={props.translationTo}
+                  masked={masked}
+                  onMaskToggle={handleMaskToggle}
+                  onOrderToggle={handleOrderToggle}
+                  sortByColumn={sortByColumn}
+                  sortByField={sortByField}
+                  orderBy={orderBy}
+                  onSortByFieldChange={handleSortByFieldChange}
+                />
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
         {sortedDictionary &&
           sortedDictionary.map(([k, v]) => (
             <Row
@@ -132,8 +146,8 @@ const TranslationTable: FC<TranslationTableProps> = (props) => {
               translationTo={props.translationTo}
             />
           ))}
-      </div>
-    </div>
+      </tbody>
+    </table>
   );
 };
 

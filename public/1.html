@@ -463,6 +463,117 @@
       .btn-full-width:hover {
         background: linear-gradient(135deg, #f5576c, #f093fb);
       }
+
+      .fancy-table-container {
+        margin-top: 20px;
+        overflow-x: auto;
+        background: #ffffff;
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      }
+
+      .fancy-styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "Quicksand", sans-serif;
+        background: #f9f9ff;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .fancy-styled-table thead tr {
+        background: linear-gradient(135deg, #f093fb, #f5576c);
+        color: #fff;
+      }
+
+      .fancy-styled-table th,
+      .fancy-styled-table td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .fancy-styled-table th {
+        font-weight: bold;
+        font-size: 1em;
+      }
+
+      .fancy-styled-table tbody tr:hover {
+        background: #f3f6fb;
+        transition: 0.3s;
+      }
+
+      .fancy-select {
+        padding: 6px 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 0.95em;
+        background: #fff;
+        outline: none;
+        transition: border 0.3s;
+      }
+
+      .fancy-select:focus {
+        border-color: #999;
+      }
+
+      .fancy-btn {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 6px;
+        background: linear-gradient(135deg, #f6d365, #fda085);
+        color: #444;
+        font-size: 0.95em;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+        font-weight: bold;
+      }
+
+      .fancy-btn:hover {
+        background: linear-gradient(135deg, #fda085, #f6d365);
+      }
+
+      .fancy-btn:active {
+        transform: scale(0.97);
+      }
+
+      .fancy-icon-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 6px;
+        background: #e3f2fd;
+        color: #444;
+        font-size: 0.95em;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+      }
+
+      .fancy-icon-btn img.btn-icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      .fancy-icon-btn:hover {
+        background: #bbdefb;
+      }
+
+      .fancy-icon-btn:active {
+        transform: scale(0.97);
+      }
+
+      .fancy-styled-table thead tr {
+        background: lightgray; /* Solid blue */
+        color: #fff; /* White text */
+      }
+
+      .fancy-styled-table td {
+        padding: 2px 4px; /* Reduced padding */
+        line-height: 1; /* Adjusted line height for tighter spacing */
+      }
     </style>
   </head>
   <body>
@@ -679,6 +790,102 @@
         </div>
 
         <!-- End fancy controls -->
+
+        <div class="fancy-table-container">
+          <table class="fancy-styled-table">
+            <thead>
+              <tr>
+                <th>
+                  <label for="columnFilter">Filter:</label>
+                  <select id="columnFilter" class="fancy-select">
+                    <option value="all">All</option>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                  </select>
+                </th>
+                <th>
+                  <button class="fancy-btn">Apply</button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Row 1, Column 1</td>
+                <td>
+                  <button class="fancy-icon-btn">
+                    <img
+                      src="https://via.placeholder.com/16/666/fff?text=🛠"
+                      alt="Edit Icon"
+                      class="btn-icon"
+                    />
+                    Edit
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>Row 2, Column 1</td>
+                <td>
+                  <button class="fancy-icon-btn">
+                    <img
+                      src="https://via.placeholder.com/16/666/fff?text=❌"
+                      alt="Delete Icon"
+                      class="btn-icon"
+                    />
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-container">
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>
+                  <label for="columnFilter">Filter:</label>
+                  <select id="columnFilter" class="styled-select">
+                    <option value="all">All</option>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                  </select>
+                </th>
+                <th>
+                  <button class="styled-btn">Action</button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Data 1</td>
+                <td>
+                  <button class="icon-btn">
+                    <img
+                      src="https://via.placeholder.com/16/666/fff?text=A"
+                      alt="Action Icon"
+                      class="btn-icon"
+                    />
+                    Do Something
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>Data 2</td>
+                <td>
+                  <button class="icon-btn">
+                    <img
+                      src="https://via.placeholder.com/16/666/fff?text=B"
+                      alt="Action Icon"
+                      class="btn-icon"
+                    />
+                    Take Action
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </main>
     </div>
 

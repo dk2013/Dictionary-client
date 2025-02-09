@@ -13,14 +13,10 @@ const MASK = "---";
 
 const Row: FC<RowProps> = (props) => {
   return (
-    <div className="rowContainer">
-      <div className="cell">
-        {props.masked === props.translationFrom ? MASK : props.word}
-      </div>
-      <div className="cell">
-        {props.masked === props.translationTo ? MASK : props.translation}
-      </div>
-    </div>
+    <tr>
+      <td>{props.masked === props.translationFrom ? MASK : props.word}</td>
+      <td>{props.masked === props.translationTo ? MASK : props.translation}</td>
+    </tr>
   );
 };
 

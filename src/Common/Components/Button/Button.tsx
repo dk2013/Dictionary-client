@@ -15,7 +15,7 @@ const Button: FC<ButtonProps> = ({
   disabled = false,
 }) => {
   const buttonClassName =
-    type === "standard" ? "icon-btn" : "styled-btn fancy-btn btn-spacing";
+    type === "standard" ? "btn" : "styled-btn fancy-btn btn-spacing";
   return (
     <div className="control-row centered">
       <button className={buttonClassName} onClick={onSave} disabled={disabled}>

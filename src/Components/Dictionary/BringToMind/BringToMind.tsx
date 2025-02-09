@@ -24,13 +24,15 @@ const BringToMind: FC<BringToMindProps> = (props) => {
 
   return (
     <Page title={props.title}>
-      <PageHeader>Bring To Mind</PageHeader>
-      <TranslationTable
-        dictionary={props.dictionary}
-        translationFrom={props.translationFrom}
-        translationTo={props.translationTo}
-        onSwapLanguages={handleSwapLanguages}
-      />
+      <div className="fancy-table-container">
+        <PageHeader>Bring To Mind</PageHeader>
+        <TranslationTable
+          dictionary={props.dictionary}
+          translationFrom={props.translationFrom}
+          translationTo={props.translationTo}
+          onSwapLanguages={handleSwapLanguages}
+        />
+      </div>
     </Page>
   );
 };

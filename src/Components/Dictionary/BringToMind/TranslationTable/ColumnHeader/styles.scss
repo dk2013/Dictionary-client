@@ -1,4 +1,6 @@
-.columnContainer {
-  flex-basis: 50%;
-  border: 1px solid red;
+.column-header {
+  display: inline-block;
+  background-color: white;
+  padding: 6px;
+  border-radius: 6px;
 }

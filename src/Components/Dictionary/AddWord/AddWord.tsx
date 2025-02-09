@@ -119,11 +119,13 @@ const AddWord: FC<AddWordProps> = (props) => {
     <Page title={props.title}>
       <div className="fancy-controls">
         <PageHeader>Add Word</PageHeader>
-        <LanguageSelector
-          translationFrom={props.translationFrom}
-          translationTo={props.translationTo}
-          onSwapLanguages={handleSwapLanguages}
-        />
+        <div className="control-row centered">
+          <LanguageSelector
+            translationFrom={props.translationFrom}
+            translationTo={props.translationTo}
+            onSwapLanguages={handleSwapLanguages}
+          />
+        </div>
         <NewWordInput
           value={newWord}
           onNewWordChange={(v: string) => handleNewWordChange(v)}

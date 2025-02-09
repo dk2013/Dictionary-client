@@ -1,14 +1,6 @@
-.tableContainer {
-  display: flex;
-  flex-direction: column;
-
-  .headerContainer {
+.fancy-styled-table-header {
+  .right-column {
     display: flex;
-    flex-direction: row;
-  }
-
-  .bodyContainer {
-    display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
   }
 }

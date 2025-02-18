@@ -1,4 +1,4 @@
-import doubleArrowsIcon from "../../../assets/images/double-arrows.svg";
+import doubleArrowsIcon from "../../../Assets/Images/double-arrows.svg";
 import React, { FC } from "react";
 import { sortOrders } from "../../../Components/Dictionary/BringToMind/TranslationTable/TranslationTable";
 

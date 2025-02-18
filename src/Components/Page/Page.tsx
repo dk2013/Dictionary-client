@@ -1,6 +1,5 @@
 import { FC, ReactNode, useEffect } from "react";
 import "./styles.scss";
-// import { ____Header } from "../____Header";
 import { HeaderAndNav } from "../HeaderAndNav";
 
 interface PageProps {
@@ -13,8 +12,7 @@ const Page: FC<PageProps> = (props) => {
     if (props.title?.length) {
       document.title = props.title;
     } else {
-      // set default title
-      document.title = "Your Dictionary";
+      document.title = "Your Fancy Dictionary";
     }
   }, [props.title]);
 
@@ -22,8 +20,6 @@ const Page: FC<PageProps> = (props) => {
     <>
       <HeaderAndNav />
       <main>
-        {/*<____Header />*/}
-
         <section className="content">{props.children}</section>
       </main>
     </>

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import unauthenticatedUserIcon from "../../../assets/images/unauthenticated_user.svg";
+import unauthenticatedUserIcon from "../../../Assets/Images/unauthenticated-user.svg";
 import styles from "./Header.module.scss";
 
 interface IHeaderProps {

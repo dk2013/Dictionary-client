@@ -23,9 +23,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "BUILD_PATH=../server/public react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "BUILD_PATH=../server/public craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "author": "Dmitriy Korytnyi",
@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
-    "sass": "^1.53.0"
+    "@craco/craco": "^7.1.0",
+    "sass": "^1.85.0"
   }
 }

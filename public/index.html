@@ -8,148 +8,15 @@
     <meta name="description" content="Dictionary web application" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
       rel="stylesheet"
     />
     <title>Dictionary</title>
 
     <style>
-      /* RESET */
-
-
-      /* BODY */
-
-
-      /* PAGE WRAPPER */
-      .page-wrapper {
-        position: relative;
-        min-height: 100vh;
-        background: #ffffff;
-        border-radius: 12px;
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-        display: flex;
-        flex-direction: column;
-        z-index: 0;
-      }
-
-      /* ORIENTATION-BASED WIDTHS */
-      @media (orientation: portrait) {
-        .page-wrapper {
-          width: 100%;
-          margin: 0;
-        }
-      }
-
-      @media (orientation: landscape) {
-        .page-wrapper {
-          width: 60%;
-          margin: 20px auto;
-        }
-      }
-
-      /* HEADER */
-      header {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #f093fb, #f5576c);
-        height: 70px;
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
-        padding: 0 15px;
-        box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-      }
-
-      .app-title {
-        font-family: "Pacifico", cursive;
-        font-size: 1.8em;
-        color: #fff;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-      }
-
-      /* BURGER ICON */
-      .burger-icon {
-        position: absolute;
-        left: 15px;
-        width: 36px;
-        height: 28px;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-
-      .burger-icon span {
-        display: block;
-        height: 4px;
-        width: 100%;
-        background: #fff;
-        border-radius: 2px;
-        transition: 0.3s;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-      }
-
-      /* PROFILE ICON */
-      .profile-icon {
-        position: absolute;
-        right: 15px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        overflow: hidden;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-      }
-
-      .profile-icon img {
-        width: 100%;
-        height: auto;
-        display: block;
-      }
-
-      /* SIDE MENUS */
-      nav.side-menu {
-        position: absolute;
-        top: 70px;
-        width: 220px;
-        height: calc(100vh - 70px);
-        background-color: #ffffff;
-        border-radius: 0 0 12px 12px;
-        transition: transform 0.3s ease;
-        z-index: 10;
-        overflow-y: auto;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      nav.side-menu ul {
-        list-style: none;
-        padding: 15px;
-      }
-
-      nav.side-menu ul li {
-        margin: 15px 0;
-      }
-
-      nav.side-menu ul li a {
-        color: #444;
-        text-decoration: none;
-        font-size: 1em;
-        padding: 8px;
-        display: block;
-        border-radius: 4px;
-        transition: background 0.3s;
-      }
-
-      nav.side-menu ul li a:hover {
-        background: #f3f6fb;
-      }
-
       /* LEFT MENU */
       #side-menu-left {
         left: 0;
@@ -214,14 +81,6 @@
         /*box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);*/
       }
 
-      h3.header {
-        margin-bottom: 1rem;
-        color: #333;
-        font-family: "Quicksand", sans-serif;
-        font-weight: 600;
-        font-size: 2rem;
-        text-align: center;
-      }
       /* Spacing around the "Fancy Controls" section */
 
       /* Centered control-row items */
@@ -339,7 +198,7 @@
       }
 
       .styled-range {
-        -webkit-appearance: none;
+        appearance: none;
         width: 150px;
         height: 6px;
         border-radius: 5px;
@@ -511,7 +370,7 @@
       .fancy-styled-table {
         width: 100%;
         border-collapse: collapse;
-        font-family: "Quicksand", sans-serif;
+        font-family: "Roboto", sans-serif;
         background: #f9f9ff;
         border-radius: 12px;
         overflow: hidden;
@@ -590,11 +449,6 @@
         margin-left: 6px;
         margin-right: 2px;
         transition: transform 0.2s ease-in-out;
-      }
-
-      .table-sort-select:hover {
-        /*background: linear-gradient(135deg, #f6d365, #fda085);*/
-        /*transform: scale(1.02);*/
       }
 
       .fancy-btn {

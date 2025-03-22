@@ -1,0 +1,41 @@
+.nav {
+  &.sideMenu {
+    position: absolute;
+    top: 70px;
+    width: 220px;
+    height: calc(100vh - 70px);
+    background-color: #ffffff;
+    border-radius: 0 0 12px 12px;
+    transition: transform 0.3s ease;
+    z-index: 10;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    ul {
+      list-style: none;
+      padding: 15px;
+
+      li {
+        margin: 15px 0;
+
+        a {
+          color: #444;
+          text-decoration: none;
+          font-size: 1em;
+          padding: 8px;
+          display: block;
+          border-radius: 4px;
+          transition: background 0.3s;
+
+          &:hover {
+            background: #f3f6fb;
+          }
+        }
+      }
+    }
+
+    &.active {
+      transform: translateX(0);
+    }
+  }
+}

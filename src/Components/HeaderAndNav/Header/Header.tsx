@@ -9,9 +9,9 @@ interface IHeaderProps {
 
 const Header: FC<IHeaderProps> = ({ onAppMenuClick, onProfileMenuClick }) => {
   return (
-    <header>
+    <header className={styles.header}>
       <div
-        className="burger-icon"
+        className={styles.burgerIcon}
         id="burger-icon"
         onClick={() => onAppMenuClick()}
       >
@@ -19,17 +19,13 @@ const Header: FC<IHeaderProps> = ({ onAppMenuClick, onProfileMenuClick }) => {
         <span></span>
         <span></span>
       </div>
-      <h1 className="app-title">Fancy Dictionary</h1>
+      <h1 className={styles.appTitle}>Fancy Dictionary</h1>
       <div
-        className="profile-icon"
+        className={styles.profileIcon}
         id="profile-icon"
         onClick={() => onProfileMenuClick()}
       >
-        <img
-          className={styles.profileIcon}
-          src={unauthenticatedUserIcon}
-          alt="Profile"
-        />
+        <img src={unauthenticatedUserIcon} alt="Profile" />
       </div>
     </header>
   );

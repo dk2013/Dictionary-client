@@ -38,4 +38,20 @@
       transform: translateX(0);
     }
   }
+
+  &.side-menu-left {
+    left: 0;
+    border-bottom-left-radius: 12px;
+    transform: translateX(-105%);
+  }
+
+  &.active {
+    transform: translateX(0);
+  }
+
+  &.side-menu-right {
+    right: 0;
+    border-bottom-right-radius: 12px;
+    transform: translateX(105%);
+  }
 }

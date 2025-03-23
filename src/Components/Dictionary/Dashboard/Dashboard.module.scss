@@ -34,3 +34,25 @@
   flex-wrap: wrap;
   height: 100%;
 }
+
+.contentTitle {
+  font-family: "Pacifico", cursive;
+  font-size: 1.6em;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.contentDescription {
+  margin-bottom: 12px;
+  line-height: 1.5;
+  color: #666;
+  font-size: 0.95em;
+}
+
+.contentPlaceholder {
+  margin-top: 10px;
+  background: #fafafa;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.1);
+}

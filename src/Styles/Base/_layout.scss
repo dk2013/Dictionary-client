@@ -33,3 +33,12 @@ body {
     margin: 20px auto;
   }
 }
+
+main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  background: #fff;
+}

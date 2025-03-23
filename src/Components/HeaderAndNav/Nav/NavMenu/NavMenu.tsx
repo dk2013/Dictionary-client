@@ -20,15 +20,17 @@ const NavMenu: FC<NavMenuProps> = ({
   routes,
 }) => {
   const user: User | null = useAppSelector((state) => state.user.user);
-  const navId = `side-menu-${position}`;
-  const navClass = menuActive ? `${styles.sideMenu} active` : styles.sideMenu;
+  const navPositionClass = `side-menu-${position}`;
+  const navClass = menuActive
+    ? `${styles.sideMenu} ${styles.active}`
+    : styles.sideMenu;
 
   routes = !user
     ? routes.filter((route) => route.name !== "Logout")
     : routes.filter((route) => route.name !== "Login");
 
   return (
-    <nav id={navId} className={classNames(styles.nav, navClass)}>
+    <nav className={classNames(styles.nav, navClass, styles[navPositionClass])}>
       <ul>
         {routes.map((route) => {
           return (

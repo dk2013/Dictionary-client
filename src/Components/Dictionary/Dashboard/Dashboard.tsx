@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { Page } from "../../Page";
 import { NavLink } from "react-router-dom";
-import "./styles.scss";
+import styles from "./Dashboard.module.scss";
+import classNames from "classnames";
 
 interface DashboardProps {
   title?: string;
@@ -10,8 +11,10 @@ interface DashboardProps {
 const Dashboard: FC<DashboardProps> = (props) => {
   return (
     <Page title={props.title}>
-      <div className="content-title">Welcome to Fancy Dictionary</div>
-      <p className="content-description">
+      <div className={classNames(styles.contentTitle)}>
+        Welcome to Fancy Dictionary
+      </div>
+      <p className={classNames(styles.contentDescription)}>
         This version of the dictionary app includes a playful gradient, a custom
         Google font, pastel side menus, and a range of fancy controls below.
         We’ve added a select, input, table, buttons, radio, toggle, and a range

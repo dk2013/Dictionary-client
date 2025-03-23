@@ -1,15 +1,18 @@
 import React, { FC, ReactNode } from "react";
-import "./styles.scss";
+import styles from "./Block.module.scss";
+import classNames from "classnames";
 
 interface BlockProps {
   children: ReactNode;
   extraContainerClassName?: string;
 }
 
-const Block: FC<BlockProps> = (props) => {
+const Block: FC<BlockProps> = ({ children, extraContainerClassName = "" }) => {
   return (
-    <div className={`container ${props.extraContainerClassName}`}>
-      {props.children}
+    <div
+      className={classNames(styles.container, styles[extraContainerClassName])}
+    >
+      {children}
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import React, { FC, ReactNode } from "react";
-import "./styles.scss";
 
 interface ButtonProps {
   children: ReactNode;

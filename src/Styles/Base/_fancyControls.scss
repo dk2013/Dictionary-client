@@ -301,6 +301,13 @@
   background: #f9f9ff;
   border-radius: 12px;
   overflow: hidden;
+
+  .fancy-styled-table-header {
+    .right-column {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
 }
 
 .fancy-styled-table thead tr {

@@ -1,5 +1,4 @@
 import React, { ChangeEvent, FC, useState } from "react";
-import "./styles.scss";
 import { ColumnHeader } from "./ColumnHeader";
 import { languageCodes } from "../../../../Common/Constants/dictionary";
 import { Row } from "./Row";

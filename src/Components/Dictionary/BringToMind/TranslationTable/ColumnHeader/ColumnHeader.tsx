@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC } from "react";
 import { fields, sortOrders } from "../TranslationTable";
 import DoubleArrowsIcon from "../../../../../Common/Components/Icons/DoubleArrowsIcon";
-import "./styles.scss";
+import styles from "./ColumnHeader.module.scss";
 
 interface ColumnHeaderProps {
   position: string;
@@ -17,7 +17,7 @@ interface ColumnHeaderProps {
 
 const ColumnHeader: FC<ColumnHeaderProps> = (props) => {
   return (
-    <div className="column-header">
+    <div className={styles.columnHeader}>
       <button
         className="btn column-header-btn"
         onClick={() => props.onMaskToggle(props.language)}

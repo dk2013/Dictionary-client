@@ -1,5 +1,4 @@
 import { FC, ReactNode, useEffect } from "react";
-import "./styles.scss";
 import { HeaderAndNav } from "../HeaderAndNav";
 
 interface PageProps {

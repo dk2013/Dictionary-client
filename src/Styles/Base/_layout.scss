@@ -1,9 +1,44 @@
 body {
-  font-family: "Quicksand", sans-serif;
+  font-family: "Roboto", sans-serif;
   background: #f3f6fb; /* Pastel background */
   color: #333;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+}
+
+.page-wrapper {
+  position: relative;
+  min-height: 100vh;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  z-index: 0;
+}
+
+/* ORIENTATION-BASED WIDTHS */
+@media (orientation: portrait) {
+  .page-wrapper {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media (orientation: landscape) {
+  .page-wrapper {
+    width: 60%;
+    margin: 20px auto;
+  }
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  background: #fff;
 }

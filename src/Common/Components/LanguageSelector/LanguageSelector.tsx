@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import "./styles.scss";
 import { FaArrowRight } from "react-icons/fa";
+import styles from "./LanguageSelector.module.scss";
 
 interface LanguageSelectorProps {
   onSwapLanguages: () => void;
@@ -10,9 +10,9 @@ interface LanguageSelectorProps {
 
 const LanguageSelector: FC<LanguageSelectorProps> = (props) => {
   return (
-    <div className="languageSelector">
+    <div className={styles.languageSelector}>
       {props.translationFrom}{" "}
-      <FaArrowRight onClick={props.onSwapLanguages} className="ico" />{" "}
+      <FaArrowRight onClick={props.onSwapLanguages} className={styles.ico} />{" "}
       {props.translationTo}
     </div>
   );

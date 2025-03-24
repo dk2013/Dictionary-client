@@ -1,1 +1,4 @@
-@use "./base/index";
+@use "base/reset";
+@use "base/layout";
+@use "base/fancyControls"; // order matter
+@use "base/global"; // order matter

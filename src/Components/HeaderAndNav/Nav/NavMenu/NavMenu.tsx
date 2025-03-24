@@ -3,6 +3,8 @@ import { IRoute } from "../../../../Types/route";
 import { NavLink } from "react-router-dom";
 import { User } from "../../../../Types/user";
 import { useAppSelector } from "../../../../Hooks/store";
+import classNames from "classnames";
+import styles from "./NavMenu.module.scss";
 
 interface NavMenuProps {
   menuActive: boolean;
@@ -18,15 +20,17 @@ const NavMenu: FC<NavMenuProps> = ({
   routes,
 }) => {
   const user: User | null = useAppSelector((state) => state.user.user);
-  const navId = `side-menu-${position}`;
-  const navClass = menuActive ? "side-menu active" : "side-menu";
+  const navPositionClass = `side-menu-${position}`;
+  const navClass = menuActive
+    ? `${styles.sideMenu} ${styles.active}`
+    : styles.sideMenu;
 
   routes = !user
     ? routes.filter((route) => route.name !== "Logout")
     : routes.filter((route) => route.name !== "Login");
 
   return (
-    <nav id={navId} className={navClass}>
+    <nav className={classNames(styles.nav, navClass, styles[navPositionClass])}>
       <ul>
         {routes.map((route) => {
           return (

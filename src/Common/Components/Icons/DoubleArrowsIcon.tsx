@@ -1,6 +1,7 @@
 import doubleArrowsIcon from "../../../Assets/Images/double-arrows.svg";
 import React, { FC } from "react";
 import { sortOrders } from "../../../Components/Dictionary/BringToMind/TranslationTable/TranslationTable";
+import styles from "./DoubleArrowsIcon.module.scss";
 
 interface DoubleArrowsIconProps {
   orderBy: sortOrders;
@@ -11,12 +12,12 @@ const DoubleArrowsIcon: FC<DoubleArrowsIconProps> = ({ orderBy }) => {
 
   return (
     <img
-      className="sort-arrow"
+      className={styles.sortArrow}
       style={{
         transform: `rotate(${rotate}deg)`,
       }}
       src={doubleArrowsIcon}
-      alt="Sort"
+      alt="Sort Direction"
       width="24"
       height="24"
     />

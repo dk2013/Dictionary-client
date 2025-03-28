@@ -6,6 +6,10 @@ import { TranslationInput } from "./TranslationInput";
 import { Button } from "../../../Common/Components/Button";
 import { tDictionary } from "../../../Common/Types/dictionary";
 import { PageHeader } from "../../../Common/Components/PageHeader";
+import {
+  newWordPlaceholders,
+  translationPlaceholders,
+} from "../../../Common/Constants/dictionary";
 
 interface AddWordProps {
   title?: string;
@@ -31,6 +35,9 @@ const AddWord: FC<AddWordProps> = (props) => {
   const [newWord, setNewWord] = useState<string>("");
   const [translation, setTranslation] = useState<string>("");
   const [translationExists, setTranslationExists] = useState<boolean>(false);
+
+  const newWordPlaceholder = newWordPlaceholders[props.translationFrom];
+  const translationPlaceholder = translationPlaceholders[props.translationTo];
 
   const getTranslationFromDictionary = useCallback(
     (word: string, translationFrom: string, translationTo: string) => {
@@ -92,15 +99,15 @@ const AddWord: FC<AddWordProps> = (props) => {
     setNewWord(translation);
 
     const newTranslationTo = props.translationFrom;
-    const newTranslateFrom = props.translationTo;
+    const newTranslationFrom = props.translationTo;
     const translatedWord = getTranslationFromDictionary(
       translation,
-      newTranslateFrom,
+      newTranslationFrom,
       newTranslationTo
     );
 
     setTranslation(translatedWord || "");
-    props.changeTranslateFrom(newTranslateFrom);
+    props.changeTranslateFrom(newTranslationFrom);
     props.changeTranslationTo(newTranslationTo);
   };
 
@@ -128,6 +135,7 @@ const AddWord: FC<AddWordProps> = (props) => {
         </div>
         <NewWordInput
           value={newWord}
+          placeholder={newWordPlaceholder}
           onNewWordChange={(v: string) => handleNewWordChange(v)}
           onKeyDown={handleKeyDown}
         />
@@ -135,11 +143,11 @@ const AddWord: FC<AddWordProps> = (props) => {
           onSave={handleDelete}
           disabled={!newWord || !translation || !translationExists}
         >
-          {/*<AiOutlineDelete></AiOutlineDelete>*/}
           🗑️Clear
         </Button>
         <TranslationInput
           value={translation}
+          placeholder={translationPlaceholder}
           onTranslationChange={(v: string) => handleTranslationChange(v)}
           onKeyDown={handleKeyDown}
         />

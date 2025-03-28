@@ -2,19 +2,25 @@ import React, { FC } from "react";
 
 interface NewWordInputProps {
   value: string;
+  placeholder: string;
   onNewWordChange: (e: string) => void;
   onKeyDown: (key: string) => void;
 }
 
-const NewWordInput: FC<NewWordInputProps> = (props) => {
+const NewWordInput: FC<NewWordInputProps> = ({
+  value,
+  placeholder,
+  onNewWordChange,
+  onKeyDown,
+}) => {
   return (
     <div className="control-row centered">
       <input
         className="styled-input add-word-input"
-        value={props.value}
-        placeholder="Enter English word..."
-        onChange={(e) => props.onNewWordChange(e.target.value)}
-        onKeyDown={(e) => props.onKeyDown(e.key)}
+        value={value}
+        placeholder={placeholder}
+        onChange={(e) => onNewWordChange(e.target.value)}
+        onKeyDown={(e) => onKeyDown(e.key)}
       />
     </div>
   );

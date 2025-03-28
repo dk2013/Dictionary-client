@@ -2,19 +2,25 @@ import React, { FC } from "react";
 
 interface TranslationProps {
   value: string;
+  placeholder: string;
   onTranslationChange: (e: string) => void;
   onKeyDown: (key: string) => void;
 }
 
-const TranslationInput: FC<TranslationProps> = (props) => {
+const TranslationInput: FC<TranslationProps> = ({
+  value,
+  placeholder,
+  onTranslationChange,
+  onKeyDown,
+}) => {
   return (
     <div className="control-row centered">
       <input
         className="styled-input add-word-input"
-        value={props.value}
-        placeholder="Enter Russian translation..."
-        onChange={(e) => props.onTranslationChange(e.target.value)}
-        onKeyDown={(e) => props.onKeyDown(e.key)}
+        value={value}
+        placeholder={placeholder}
+        onChange={(e) => onTranslationChange(e.target.value)}
+        onKeyDown={(e) => onKeyDown(e.key)}
       />
     </div>
   );

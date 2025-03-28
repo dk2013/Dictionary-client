@@ -1,4 +1,8 @@
-import { LanguageCodes, DictionaryObj } from "../Types/dictionary";
+import {
+  LanguageCodes,
+  DictionaryObj,
+  Placeholders,
+} from "../Types/dictionary";
 
 export const languageCodes: LanguageCodes = {
   // ISO 639-2 Code
@@ -7,6 +11,16 @@ export const languageCodes: LanguageCodes = {
   UKR: "UKR",
   SPA: "SPA",
   GER: "GER",
+};
+
+export const newWordPlaceholders: Placeholders = {
+  ENG: "Enter English word...",
+  RUS: "Введите слово на русском...",
+};
+
+export const translationPlaceholders: Placeholders = {
+  ENG: "Enter English translation...",
+  RUS: "Введите перевод на русский...",
 };
 
 /*

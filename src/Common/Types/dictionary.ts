@@ -2,6 +2,10 @@ export type LanguageCodes = {
   [index: string]: string;
 };
 
+export type Placeholders = {
+  [index in keyof LanguageCodes]: string;
+};
+
 type Translation = string;
 type Modified = Date;
 type Order = number;

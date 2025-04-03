@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-interface RowProps {
+interface IRowProps {
   word: string;
   translation: string;
   masked: string;
@@ -10,7 +10,7 @@ interface RowProps {
 
 const MASK = "---";
 
-const Row: FC<RowProps> = (props) => {
+const Row: FC<IRowProps> = (props) => {
   return (
     <tr>
       <td>{props.masked === props.translationFrom ? MASK : props.word}</td>

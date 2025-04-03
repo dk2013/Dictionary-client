@@ -2,13 +2,13 @@ import React, { FC } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import styles from "./LanguageSelector.module.scss";
 
-interface LanguageSelectorProps {
+interface ILanguageSelectorProps {
   onSwapLanguages: () => void;
   translationFrom: string;
   translationTo: string;
 }
 
-const LanguageSelector: FC<LanguageSelectorProps> = (props) => {
+const LanguageSelector: FC<ILanguageSelectorProps> = (props) => {
   return (
     <div className={styles.languageSelector}>
       {props.translationFrom}{" "}

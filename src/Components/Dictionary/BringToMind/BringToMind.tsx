@@ -4,7 +4,7 @@ import { PageHeader } from "../../../Common/Components/PageHeader";
 import { TranslationTable } from "./TranslationTable";
 import { tDictionary } from "../../../Common/Types/dictionary";
 
-interface BringToMindProps {
+interface IBringToMindProps {
   title?: string;
   dictionary: tDictionary;
   translationFrom: string;
@@ -13,7 +13,7 @@ interface BringToMindProps {
   changeTranslationTo: (v: string) => void;
 }
 
-const BringToMind: FC<BringToMindProps> = (props) => {
+const BringToMind: FC<IBringToMindProps> = (props) => {
   const handleSwapLanguages = () => {
     const newTranslationTo = props.translationFrom;
     const newTranslateFrom = props.translationTo;

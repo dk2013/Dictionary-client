@@ -1,12 +1,12 @@
 import { FC, ReactNode, useEffect } from "react";
 import { HeaderAndNav } from "../HeaderAndNav";
 
-interface PageProps {
+interface IPageProps {
   children: ReactNode;
   title?: string;
 }
 
-const Page: FC<PageProps> = (props) => {
+const Page: FC<IPageProps> = (props) => {
   useEffect(() => {
     if (props.title?.length) {
       document.title = props.title;

@@ -9,7 +9,7 @@ import {
 import { LanguageSelector } from "../../../../Common/Components/LanguageSelector";
 import { sort } from "./utils";
 
-interface TranslationTableProps {
+interface ITranslationTableProps {
   dictionary: tDictionary;
   translationFrom: string;
   translationTo: string;
@@ -36,7 +36,7 @@ export const enum sortOrders {
   DESC = "DESC",
 }
 
-const TranslationTable: FC<TranslationTableProps> = (props) => {
+const TranslationTable: FC<ITranslationTableProps> = (props) => {
   const [masked, setMasked] = useState<string>(selectedColumns.NONE);
   const [sortByColumn, setSortByColumn] = useState<string>(languageCodes.ENG);
   const [sortByField, setSortByField] = useState<fields>(fields.NAME);

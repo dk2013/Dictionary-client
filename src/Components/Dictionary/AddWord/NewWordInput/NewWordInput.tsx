@@ -1,13 +1,13 @@
 import React, { FC } from "react";
 
-interface NewWordInputProps {
+interface INewWordInputProps {
   value: string;
   placeholder: string;
   onNewWordChange: (e: string) => void;
   onKeyDown: (key: string) => void;
 }
 
-const NewWordInput: FC<NewWordInputProps> = ({
+const NewWordInput: FC<INewWordInputProps> = ({
   value,
   placeholder,
   onNewWordChange,

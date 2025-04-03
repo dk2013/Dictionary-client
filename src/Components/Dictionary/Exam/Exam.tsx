@@ -1,10 +1,11 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Page } from "../../Page";
-import { PageHeader } from "../../../Common/Components/PageHeader";
 import { LanguageSelector } from "../../../Common/Components/LanguageSelector";
-import { Block } from "../../../Common/Components/Block";
+import classNames from "classnames";
+import styles from "./Exam.module.scss";
+import { languageCodes } from "../../../Common/Constants/dictionary";
 
-interface ExamProps {
+interface IExamProps {
   title?: string;
   translationFrom: string;
   translationTo: string;
@@ -12,7 +13,23 @@ interface ExamProps {
   changeTranslationTo: (v: string) => void;
 }
 
-const Exam: FC<ExamProps> = (props) => {
+interface ITestState {
+  translationFrom: string;
+  translationTo: string;
+  started: boolean;
+  startedAt: Date | null;
+}
+
+const defaultTestState: ITestState = {
+  translationFrom: languageCodes.ENG,
+  translationTo: languageCodes.RUS,
+  started: false,
+  startedAt: null,
+};
+
+const Exam: FC<IExamProps> = (props) => {
+  const [testState, setTestState] = useState<ITestState>(defaultTestState);
+
   const handleSwapLanguages = () => {
     const newTranslationTo = props.translationFrom;
     const newTranslateFrom = props.translationTo;
@@ -23,13 +40,17 @@ const Exam: FC<ExamProps> = (props) => {
 
   return (
     <Page title={props.title}>
-      <PageHeader>Check Yourself</PageHeader>
-      <Block extraContainerClassName="textBlock">Translate word</Block>
+      <div className={classNames(styles.contentTitle)}>Check Yourself</div>
+      <p className={classNames(styles.contentDescription)}>
+        Test your vocabulary and strengthen your memory by learning new words.
+        Try to beat your high score!
+      </p>
       <LanguageSelector
         translationFrom={props.translationFrom}
         translationTo={props.translationTo}
         onSwapLanguages={handleSwapLanguages}
       />
+      <button className="styled-btn fancy-btn width-80">Start test</button>
     </Page>
   );
 };

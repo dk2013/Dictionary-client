@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 import { Page } from "../../Page";
 
-interface SettingsProps {
+interface ISettingsProps {
   title?: string;
 }
 
-const Settings: FC<SettingsProps> = (props) => {
+const Settings: FC<ISettingsProps> = (props) => {
   return <Page title={props.title}>Settings</Page>;
 };
 

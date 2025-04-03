@@ -1,13 +1,13 @@
 import React, { FC, ReactNode } from "react";
 
-interface ButtonProps {
+interface IButtonProps {
   children: ReactNode;
   onSave: () => void;
   disabled?: boolean;
   type?: "fancy" | "standard";
 }
 
-const Button: FC<ButtonProps> = ({
+const Button: FC<IButtonProps> = ({
   onSave,
   children,
   type = "standard",

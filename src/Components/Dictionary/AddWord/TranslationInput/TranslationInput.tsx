@@ -1,13 +1,13 @@
 import React, { FC } from "react";
 
-interface TranslationProps {
+interface ITranslationProps {
   value: string;
   placeholder: string;
   onTranslationChange: (e: string) => void;
   onKeyDown: (key: string) => void;
 }
 
-const TranslationInput: FC<TranslationProps> = ({
+const TranslationInput: FC<ITranslationProps> = ({
   value,
   placeholder,
   onTranslationChange,

@@ -15,7 +15,7 @@ import {
   deleteAndGetUpdatedDictionary,
 } from "./utils";
 import fetchUser from "../../Utils/auth";
-import { User } from "../../Types/user";
+import { IUser } from "../../Types/user";
 import { useDispatch } from "react-redux";
 import { setUser as setUserInStore } from "../../userSlice";
 
@@ -31,7 +31,7 @@ const Dictionary: FC = () => {
     languageCodes.ENG
   );
   const [translationTo, setTranslationTo] = useState<string>(languageCodes.RUS);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
   const [dictionaryId, setDictionaryId] = useState<string | null>(null);
 
   const getDictionary = useCallback(async (userId: string) => {
@@ -49,7 +49,7 @@ const Dictionary: FC = () => {
 
   useEffect(() => {
     async function getUser() {
-      const userData: User = await fetchUser();
+      const userData: IUser = await fetchUser();
       setUser(userData);
       dispatch(setUserInStore(userData));
     }

@@ -3,11 +3,11 @@ import React, { FC } from "react";
 import { sortOrders } from "../../../Components/Dictionary/BringToMind/TranslationTable/TranslationTable";
 import styles from "./DoubleArrowsIcon.module.scss";
 
-interface DoubleArrowsIconProps {
+interface IDoubleArrowsIconProps {
   orderBy: sortOrders;
 }
 
-const DoubleArrowsIcon: FC<DoubleArrowsIconProps> = ({ orderBy }) => {
+const DoubleArrowsIcon: FC<IDoubleArrowsIconProps> = ({ orderBy }) => {
   const rotate = orderBy === sortOrders.ASC ? 90 : -90;
 
   return (

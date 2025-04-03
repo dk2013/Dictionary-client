@@ -1,25 +1,25 @@
 import React, { FC } from "react";
 import { IRoute } from "../../../../Types/route";
 import { NavLink } from "react-router-dom";
-import { User } from "../../../../Types/user";
+import { IUser } from "../../../../Types/user";
 import { useAppSelector } from "../../../../Hooks/store";
 import classNames from "classnames";
 import styles from "./NavMenu.module.scss";
 
-interface NavMenuProps {
+interface INavMenuProps {
   menuActive: boolean;
   onMenuClick: () => void;
   position: "left" | "right";
   routes: IRoute[];
 }
 
-const NavMenu: FC<NavMenuProps> = ({
+const NavMenu: FC<INavMenuProps> = ({
   menuActive,
   onMenuClick,
   position,
   routes,
 }) => {
-  const user: User | null = useAppSelector((state) => state.user.user);
+  const user: IUser | null = useAppSelector((state) => state.user.user);
   const navPositionClass = `side-menu-${position}`;
   const navClass = menuActive
     ? `${styles.sideMenu} ${styles.active}`

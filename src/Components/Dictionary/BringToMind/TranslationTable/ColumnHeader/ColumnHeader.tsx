@@ -3,7 +3,7 @@ import { fields, sortOrders } from "../TranslationTable";
 import DoubleArrowsIcon from "../../../../../Common/Components/Icons/DoubleArrowsIcon";
 import styles from "./ColumnHeader.module.scss";
 
-interface ColumnHeaderProps {
+interface IColumnHeaderProps {
   position: string;
   language: string;
   masked: string;
@@ -15,7 +15,7 @@ interface ColumnHeaderProps {
   onSortByFieldChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const ColumnHeader: FC<ColumnHeaderProps> = (props) => {
+const ColumnHeader: FC<IColumnHeaderProps> = (props) => {
   return (
     <div className={styles.columnHeader}>
       <button

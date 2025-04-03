@@ -4,11 +4,11 @@ import { NavLink } from "react-router-dom";
 import styles from "./Dashboard.module.scss";
 import classNames from "classnames";
 
-interface DashboardProps {
+interface IDashboardProps {
   title?: string;
 }
 
-const Dashboard: FC<DashboardProps> = (props) => {
+const Dashboard: FC<IDashboardProps> = (props) => {
   return (
     <Page title={props.title}>
       <div className={classNames(styles.contentTitle)}>

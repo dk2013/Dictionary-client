@@ -11,7 +11,7 @@ import {
   translationPlaceholders,
 } from "../../../Common/Constants/dictionary";
 
-interface AddWordProps {
+interface IAddWordProps {
   title?: string;
   dictionary: tDictionary;
   translationFrom: string;
@@ -31,7 +31,7 @@ interface AddWordProps {
   changeTranslationTo: (v: string) => void;
 }
 
-const AddWord: FC<AddWordProps> = (props) => {
+const AddWord: FC<IAddWordProps> = (props) => {
   const [newWord, setNewWord] = useState<string>("");
   const [translation, setTranslation] = useState<string>("");
   const [translationExists, setTranslationExists] = useState<boolean>(false);

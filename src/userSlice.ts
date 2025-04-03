@@ -1,15 +1,15 @@
-import { User } from "./Types/user";
+import { IUser } from "./Types/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: null as User | null,
+  user: null as IUser | null,
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser(state, action: PayloadAction<User>) {
+    setUser(state, action: PayloadAction<IUser>) {
       state.user = action.payload;
     },
     clearUser(state) {

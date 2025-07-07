@@ -24,8 +24,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "BUILD_PATH=../server/public craco build",
+    "start": "HTTPS=true SSL_CRT_FILE=/Users/dmuser/projects/js/dictionary/ssl/cert.pem SSL_KEY_FILE=/Users/dmuser/projects/js/dictionary/ssl/key.pem craco start",
+    "build": "BUILD_PATH=./_build_del_/public craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
   },

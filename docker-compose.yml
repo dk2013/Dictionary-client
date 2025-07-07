@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik/acme.json:/acme.json
+      - ./traefik/traefik.yml:/etc/traefik/traefik.yml
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.YOUR-DOMAIN.com`)"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.middlewares=auth"
+      - "traefik.http.middlewares.auth.basicauth.users=admin:$$2y$$10$$yourhashedpassword"
+
+  dictionary-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: dictionary-app
+    restart: unless-stopped
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dictionary.rule=Host(`YOUR-DOMAIN.com`)"
+      - "traefik.http.routers.dictionary.entrypoints=websecure"
+      - "traefik.http.routers.dictionary.tls.certresolver=letsencrypt"
+      - "traefik.http.services.dictionary.loadbalancer.server.port=80"
+      - "traefik.docker.network=web"
+
+networks:
+  web:
+    external: true 

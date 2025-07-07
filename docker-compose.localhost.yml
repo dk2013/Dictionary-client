@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik-localhost
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik-localhost/traefik.yml:/etc/traefik/traefik.yml
+      - ./traefik-localhost/certs:/etc/traefik/certs
+    networks:
+      - web
+
+  dictionary-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: dictionary-app-localhost
+    restart: unless-stopped
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dictionary.rule=Host(`localhost`)"
+      - "traefik.http.routers.dictionary.entrypoints=websecure"
+      - "traefik.http.routers.dictionary.tls=true"
+      - "traefik.http.services.dictionary.loadbalancer.server.port=80"
+      - "traefik.docker.network=web"
+
+networks:
+  web:
+    external: true 

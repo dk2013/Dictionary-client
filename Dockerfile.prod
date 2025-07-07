@@ -1,0 +1,32 @@
+# Use official Node.js image as the base
+FROM node:18-alpine AS build
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package.json package-lock.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy the rest of the app
+COPY . .
+
+# Build the app
+RUN BUILD_PATH=build npx craco build
+
+# Production image, copy built assets from build stage
+FROM nginx:alpine
+
+# Copy built assets
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Copy custom nginx configuration for production (HTTP only, SSL handled by Traefik)
+COPY nginx.prod.conf /etc/nginx/nginx.conf
+
+# Expose port 80 only (SSL handled by Traefik)
+EXPOSE 80
+
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"] 

@@ -13,14 +13,14 @@ interface IExamProps {
   changeTranslationTo: (v: string) => void;
 }
 
-interface ITestState {
+interface IExamState {
   translationFrom: string;
   translationTo: string;
   started: boolean;
-  startedAt: Date | null;
+  startedAt: number | null;
 }
 
-const defaultTestState: ITestState = {
+const defaultExamState: IExamState = {
   translationFrom: languageCodes.ENG,
   translationTo: languageCodes.RUS,
   started: false,
@@ -28,7 +28,7 @@ const defaultTestState: ITestState = {
 };
 
 const Exam: FC<IExamProps> = (props) => {
-  const [testState, setTestState] = useState<ITestState>(defaultTestState);
+  const [examState, setExamState] = useState<IExamState>(defaultExamState);
 
   const handleSwapLanguages = () => {
     const newTranslationTo = props.translationFrom;
@@ -36,6 +36,16 @@ const Exam: FC<IExamProps> = (props) => {
 
     props.changeTranslateFrom(newTranslateFrom);
     props.changeTranslationTo(newTranslationTo);
+  };
+
+  const handleStartExam = () => {
+    setExamState((prev) => ({ ...prev, started: true, startedAt: Date.now() }));
+
+    console.log(examState);
+  };
+
+  const handleStopExam = () => {
+    setExamState((prev) => ({ ...prev, started: false, startedAt: null }));
   };
 
   return (
@@ -49,8 +59,24 @@ const Exam: FC<IExamProps> = (props) => {
         translationFrom={props.translationFrom}
         translationTo={props.translationTo}
         onSwapLanguages={handleSwapLanguages}
+        disabled={examState.started}
       />
-      <button className="styled-btn fancy-btn width-80">Start test</button>
+      {examState.started || (
+        <button
+          className="styled-btn fancy-btn width-80"
+          onClick={handleStartExam}
+        >
+          Start Exam
+        </button>
+      )}
+      {!examState.started || (
+        <button
+          className="styled-btn fancy-btn width-80"
+          onClick={handleStopExam}
+        >
+          Stop Exam
+        </button>
+      )}
     </Page>
   );
 };

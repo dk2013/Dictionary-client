@@ -1,0 +1,73 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run tests
+      run: npm test -- --watchAll=false
+    
+    - name: Build app
+      run: npm run build
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Deploy to production server
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          # Navigate to project directory
+          cd /path/to/your/project
+          
+          # Pull latest changes
+          git pull origin master
+          
+          # Create traefik directory if it doesn't exist
+          mkdir -p traefik
+          touch traefik/acme.json
+          chmod 600 traefik/acme.json
+          
+          # Create Docker network if it doesn't exist
+          docker network create web 2>/dev/null || true
+          
+          # Update configuration with your domain
+          sed -i 's/YOUR-DOMAIN.com/${{ secrets.DOMAIN }}/g' docker-compose.yml
+          sed -i 's/YOUR-EMAIL@example.com/${{ secrets.EMAIL }}/g' traefik/traefik.yml
+          
+          # Generate password for Traefik dashboard
+          PASSWORD=$(openssl passwd -apr1)
+          sed -i "s/admin:\$\$2y\$\$10\$\$yourhashedpassword/admin:$PASSWORD/" docker-compose.yml
+          
+          # Deploy with Docker Compose
+          docker-compose down
+          docker-compose up -d --build
+          
+          # Clean up old images
+          docker image prune -f
+          
+          echo "Deployment completed successfully!" 

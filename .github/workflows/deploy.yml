@@ -31,6 +31,10 @@ jobs:
     steps:
     - name: Deploy to production server
       uses: appleboy/ssh-action@v1.0.3
+      env:
+        DOMAIN: ${{ secrets.DOMAIN }}
+        EMAIL: ${{ secrets.EMAIL }}
+        TRAEFIK_PASSWORD_HASH: ${{ secrets.TRAEFIK_PASSWORD_HASH }}
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}

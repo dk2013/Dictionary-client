@@ -35,12 +35,14 @@ jobs:
       env:
         DOMAIN: ${{ vars.DOMAIN }}
         EMAIL: ${{ vars.EMAIL }}
-        TRAEFIK_PASSWORD_HASH: ${{ vars.TRAEFIK_PASSWORD_HASH }}
+        TRAEFIK_PASSWORD_HASH: ${{ secrets.TRAEFIK_PASSWORD_HASH }}
         PROJECT_DIR: ${{ vars.PROJECT_DIR }}
       with:
         host: ${{ vars.HOST }}
         username: ${{ vars.USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         port: ${{ vars.PORT }}
-        script:
-          pwd && ./scripts/deploy.sh 
+        envs: DOMAIN,EMAIL,TRAEFIK_PASSWORD_HASH,PROJECT_DIR
+        script: |
+          cd ${{ vars.PROJECT_DIR }}
+          ./scripts/deploy.sh 

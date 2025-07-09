@@ -43,4 +43,4 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ vars.PORT }}
         script:
-          ./scripts/deploy.sh 
+          pwd && ./scripts/deploy.sh 

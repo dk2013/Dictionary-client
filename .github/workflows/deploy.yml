@@ -35,12 +35,11 @@ jobs:
         DOMAIN: ${{ secrets.DOMAIN }}
         EMAIL: ${{ secrets.EMAIL }}
         TRAEFIK_PASSWORD_HASH: ${{ secrets.TRAEFIK_PASSWORD_HASH }}
+        PROJECT_DIR: ${{ secrets.PROJECT_DIR }}
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          cd /path/to/your/project
-          git pull origin master
           ./scripts/deploy.sh 

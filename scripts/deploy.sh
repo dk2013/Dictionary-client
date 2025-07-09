@@ -7,6 +7,7 @@
 #   DOMAIN                - Your production domain (e.g., myapp.com)
 #   EMAIL                 - Email for Let's Encrypt
 #   TRAEFIK_PASSWORD_HASH - Password hash for Traefik dashboard (openssl passwd -apr1)
+#   PROJECT_DIR           - Absolute path to the project directory on the server
 
 set -e  # Exit on any error
 
@@ -14,11 +15,7 @@ set -e  # Exit on any error
 : "${DOMAIN:?DOMAIN environment variable not set}"
 : "${EMAIL:?EMAIL environment variable not set}"
 : "${TRAEFIK_PASSWORD_HASH:?TRAEFIK_PASSWORD_HASH environment variable not set}"
-
-echo "🚀 Starting production deployment..."
-
-# Configuration
-PROJECT_DIR="/path/to/your/project"  # Update this path
+: "${PROJECT_DIR:?PROJECT_DIR environment variable not set}"
 
 # Navigate to project directory
 cd "$PROJECT_DIR"

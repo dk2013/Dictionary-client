@@ -32,14 +32,14 @@ jobs:
     - name: Deploy to production server
       uses: appleboy/ssh-action@v1.0.3
       env:
-        DOMAIN: ${{ secrets.DOMAIN }}
-        EMAIL: ${{ secrets.EMAIL }}
-        TRAEFIK_PASSWORD_HASH: ${{ secrets.TRAEFIK_PASSWORD_HASH }}
-        PROJECT_DIR: ${{ secrets.PROJECT_DIR }}
+        DOMAIN: ${{ vars.DOMAIN }}
+        EMAIL: ${{ vars.EMAIL }}
+        TRAEFIK_PASSWORD_HASH: ${{ vars.TRAEFIK_PASSWORD_HASH }}
+        PROJECT_DIR: ${{ vars.PROJECT_DIR }}
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
+        host: ${{ vars.HOST }}
+        username: ${{ vars.USERNAME }}
         key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.PORT }}
+        port: ${{ vars.PORT }}
         script: |
           ./scripts/deploy.sh 

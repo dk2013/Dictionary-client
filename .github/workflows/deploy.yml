@@ -42,5 +42,5 @@ jobs:
         username: ${{ vars.USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         port: ${{ vars.PORT }}
-        script: |
+        script:
           ./scripts/deploy.sh 

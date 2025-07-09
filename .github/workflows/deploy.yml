@@ -42,6 +42,7 @@ jobs:
         username: ${{ vars.USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         port: ${{ vars.PORT }}
-        script: |
+        envs: DOMAIN, EMAIL, TRAEFIK_PASSWORD_HASH, PROJECT_DIR
+        script:
           cd ${{ vars.PROJECT_DIR }}
           ./scripts/deploy.sh 

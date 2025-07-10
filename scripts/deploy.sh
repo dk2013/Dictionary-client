@@ -38,11 +38,26 @@ docker network create web 2>/dev/null || echo "Network 'web' already exists"
 
 # Update configuration files with environment variables
 echo "🔧 Updating configuration files..."
+
+# Replace domain in docker-compose.yml
+echo "🔧 Replacing YOUR-DOMAIN.com with $DOMAIN in docker-compose.yml..."
 sed -i "s/YOUR-DOMAIN.com/$DOMAIN/g" docker-compose.yml
+
+# Replace email in traefik.yml
+echo "🔧 Replacing YOUR-EMAIL@example.com with $EMAIL in traefik/traefik.yml..."
 sed -i "s/YOUR-EMAIL@example.com/$EMAIL/g" traefik/traefik.yml
 
-# Use the password hash from env
-sed -i "s|admin:.*|admin:$TRAEFIK_PASSWORD_HASH|" docker-compose.yml
+# Replace password hash in docker-compose.yml
+echo "🔧 Replacing password hash in docker-compose.yml..."
+sed -i "s/admin:\$\$2y\$\$10\$\$yourhashedpassword/admin:$TRAEFIK_PASSWORD_HASH/g" docker-compose.yml
+
+# Debug: Show the docker-compose.yml content after replacements
+echo "🔍 Debug: docker-compose.yml content after replacements:"
+cat docker-compose.yml
+
+# Validate docker-compose.yml
+echo "🔍 Validating docker-compose.yml..."
+docker compose config
 
 # Stop existing containers
 echo "🛑 Stopping existing containers..."

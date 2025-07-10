@@ -7,7 +7,7 @@ entryPoints:
     address: ":80"
     http:
       redirections:
-        entrypoint:
+        entryPoint:
           to: websecure
           scheme: https
           permanent: true
@@ -23,7 +23,7 @@ providers:
 certificatesResolvers:
   letsencrypt:
     acme:
-      email: YOUR-EMAIL@example.com
+      email: tiamatgod@gmail.com
       storage: acme.json
       httpChallenge:
         entryPoint: web

@@ -40,7 +40,7 @@ chmod 600 traefik/acme.json
 
 # Create Docker network if it doesn't exist
 echo "📡 Creating Docker network..."
-docker network create web 2>/dev/null || echo "Network 'web' already exists"
+sudo docker network create web 2>/dev/null || echo "Network 'web' already exists"
 
 # Update configuration files with environment variables
 echo "🔧 Updating configuration files..."
@@ -64,15 +64,15 @@ cat docker-compose.yml
 
 # Validate docker-compose.yml
 echo "🔍 Validating docker-compose.yml..."
-docker compose config
+sudo docker compose config
 
 # Stop existing containers
 echo "🛑 Stopping existing containers..."
-docker compose down
+sudo docker compose down
 
 # Build and start new containers
 echo "🔨 Building and starting containers..."
-docker compose up -d --build
+sudo docker compose up -d --build
 
 # Wait for containers to be healthy
 echo "⏳ Waiting for containers to be ready..."
@@ -80,11 +80,11 @@ sleep 10
 
 # Check container status
 echo "📊 Container status:"
-docker compose ps
+sudo docker compose ps
 
 # Clean up old images
 echo "🧹 Cleaning up old Docker images..."
-docker image prune -f
+sudo docker image prune -f
 
 echo "✅ Deployment completed successfully!"
 echo ""

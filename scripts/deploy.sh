@@ -46,11 +46,11 @@ sed -i "s|admin:.*|admin:$TRAEFIK_PASSWORD_HASH|" docker-compose.yml
 
 # Stop existing containers
 echo "🛑 Stopping existing containers..."
-docker-compose down
+docker compose down
 
 # Build and start new containers
 echo "🔨 Building and starting containers..."
-docker-compose up -d --build
+docker compose up -d --build
 
 # Wait for containers to be healthy
 echo "⏳ Waiting for containers to be ready..."
@@ -58,7 +58,7 @@ sleep 10
 
 # Check container status
 echo "📊 Container status:"
-docker-compose ps
+docker compose ps
 
 # Clean up old images
 echo "🧹 Cleaning up old Docker images..."

@@ -24,6 +24,12 @@ echo "📁 Working directory: $(pwd)"
 
 # Pull latest changes
 echo "📥 Pulling latest changes from Git..."
+
+# Discard any local changes to ensure clean deployment
+echo "🗑️ Discarding any local changes..."
+git checkout -- .
+
+# Pull the latest changes
 git pull origin master
 
 # Create necessary directories and files

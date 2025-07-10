@@ -55,7 +55,8 @@ sed -i "s/YOUR-EMAIL@example.com/$EMAIL/g" traefik/traefik.yml
 
 # Replace password hash in docker-compose.yml
 echo "🔧 Replacing password hash in docker-compose.yml..."
-sed -i "s/admin:\$\$2y\$\$10\$\$yourhashedpassword/admin:$TRAEFIK_PASSWORD_HASH/g" docker-compose.yml
+# Use a more robust approach that handles special characters
+sed -i "s|admin:.*|admin:${TRAEFIK_PASSWORD_HASH}|g" docker-compose.yml
 
 # Debug: Show the docker-compose.yml content after replacements
 echo "🔍 Debug: docker-compose.yml content after replacements:"

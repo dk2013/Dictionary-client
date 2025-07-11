@@ -72,7 +72,7 @@ sudo docker compose down
 
 # Build and start new containers
 echo "🔨 Building and starting containers..."
-NODE_OPTIONS="--max-old-space-size=2048" BUILD_PATH=build npx craco build
+sudo docker compose up -d --build
 
 # Wait for containers to be healthy
 echo "⏳ Waiting for containers to be ready..."

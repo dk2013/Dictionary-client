@@ -14,7 +14,7 @@ RUN npm ci
 COPY . .
 
 # Build the app
-RUN BUILD_PATH=build npx craco build
+RUN NODE_OPTIONS="--max-old-space-size=2048" BUILD_PATH=build npx craco build
 
 # Production image, copy built assets from build stage
 FROM nginx:alpine

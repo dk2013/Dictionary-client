@@ -66,7 +66,12 @@ cat docker-compose.yml
 echo "🔍 Validating docker-compose.yml..."
 sudo docker compose config
 
-# Stop existing containers
+# Force stop and remove all containers (if any are running)
+echo "🧹 Force stopping and removing all Docker containers..."
+sudo docker ps -aq | xargs -r sudo docker stop
+sudo docker ps -aq | xargs -r sudo docker rm
+
+# Stop existing containers (compose)
 echo "🛑 Stopping existing containers..."
 sudo docker compose down
 

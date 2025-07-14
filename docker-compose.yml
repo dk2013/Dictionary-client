@@ -14,7 +14,7 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.traefik.rule=Host(`traefik.YOUR-DOMAIN.com`)"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.fancydictionary.com`)"
       - "traefik.http.routers.traefik.service=api@internal"
       - "traefik.http.routers.traefik.entrypoints=websecure"
       - "traefik.http.routers.traefik.middlewares=auth"
@@ -30,7 +30,7 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dictionary.rule=Host(`YOUR-DOMAIN.com`)"
+      - "traefik.http.routers.dictionary.rule=Host(`fancydictionary.com`)"
       - "traefik.http.routers.dictionary.entrypoints=websecure"
       - "traefik.http.routers.dictionary.tls.certresolver=letsencrypt"
       - "traefik.http.services.dictionary.loadbalancer.server.port=80"

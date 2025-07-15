@@ -1,4 +1,4 @@
-Traefik setup v1.100
+Traefik setup v1.101
 
 # Getting Started with Create React App
 

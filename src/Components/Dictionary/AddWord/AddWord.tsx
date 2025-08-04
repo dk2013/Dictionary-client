@@ -10,6 +10,7 @@ import {
   newWordPlaceholders,
   translationPlaceholders,
 } from "../../../Common/Constants/dictionary";
+import { ENV, envs } from "../../../Common/Constants/global";
 
 interface IAddWordProps {
   title?: string;
@@ -158,11 +159,12 @@ const AddWord: FC<IAddWordProps> = (props) => {
         >
           Save translation
         </Button>
-
-        <button onClick={() => console.log(props.dictionary)}>
-          {/*The button for the debug purpose */}
-          show dictionary
-        </button>
+        {ENV !== envs.PROD && (
+          <button onClick={() => console.log(props.dictionary)}>
+            {/*The button for the debug purpose */}
+            show dictionary
+          </button>
+        )}
       </div>
     </Page>
   );

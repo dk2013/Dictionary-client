@@ -17,6 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   z-index: 0;
+  overflow-x: hidden;
 }
 
 /* ORIENTATION-BASED WIDTHS */

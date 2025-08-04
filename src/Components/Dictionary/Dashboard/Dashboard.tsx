@@ -3,6 +3,7 @@ import { Page } from "../../Page";
 import { NavLink } from "react-router-dom";
 import styles from "./Dashboard.module.scss";
 import classNames from "classnames";
+import { ENV, envs } from "../../../Common/Constants/global";
 
 interface IDashboardProps {
   title?: string;
@@ -35,11 +36,13 @@ const Dashboard: FC<IDashboardProps> = (props) => {
             Bring To Mind
           </NavLink>
         </div>
-        <div>
-          <NavLink className="styled-btn fancy-btn width-80" to="/exam">
-            Check Yourself
-          </NavLink>
-        </div>
+        {ENV !== envs.PROD && (
+          <div>
+            <NavLink className="styled-btn fancy-btn width-80" to="/exam">
+              Check Yourself
+            </NavLink>
+          </div>
+        )}
       </div>
     </Page>
   );

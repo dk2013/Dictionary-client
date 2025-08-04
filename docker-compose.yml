@@ -30,6 +30,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.prod
+      args:
+        DOMAIN: ${DOMAIN}
+        EMAIL: ${EMAIL}
+        TRAEFIK_PASSWORD_HASH: ${TRAEFIK_PASSWORD_HASH}
+        PROJECT_DIR: ${PROJECT_DIR}
+        NODE_ENV: production
     container_name: dictionary-app
     restart: unless-stopped
     networks:

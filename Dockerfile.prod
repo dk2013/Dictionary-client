@@ -1,6 +1,20 @@
 # Use official Node.js image as the base
 FROM node:18-alpine AS build
 
+# Accept build arguments for environment variables
+ARG DOMAIN
+ARG EMAIL
+ARG TRAEFIK_PASSWORD_HASH
+ARG PROJECT_DIR
+ARG NODE_ENV=production
+
+# Set environment variables for the build stage
+ENV DOMAIN=$DOMAIN
+ENV EMAIL=$EMAIL
+ENV TRAEFIK_PASSWORD_HASH=$TRAEFIK_PASSWORD_HASH
+ENV PROJECT_DIR=$PROJECT_DIR
+ENV NODE_ENV=$NODE_ENV
+
 # Set working directory
 WORKDIR /app
 

@@ -24,9 +24,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "HTTPS=true SSL_CRT_FILE=/Users/dmuser/projects/js/dictionary/ssl/cert.pem SSL_KEY_FILE=/Users/dmuser/projects/js/dictionary/ssl/key.pem craco start",
-    "build": "BUILD_PATH=./_build_del_/public craco build",
-    "test": "craco test",
+    "start": "HTTPS=true SSL_CRT_FILE=/Users/dmuser/projects/js/dictionary/ssl/cert.pem SSL_KEY_FILE=/Users/dmuser/projects/js/dictionary/ssl/key.pem react-scripts start",
+    "build": "BUILD_PATH=./_build_del_/public react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "author": "Dmitriy Korytnyi",
@@ -49,7 +49,6 @@
     ]
   },
   "devDependencies": {
-    "@craco/craco": "^7.1.0",
     "dotenv": "^16.4.7",
     "sass": "^1.85.0"
   }

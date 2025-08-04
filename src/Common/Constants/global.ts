@@ -1,4 +1,4 @@
-export const ENV = process.env.ENV || "local";
+export const ENV = process.env.REACT_APP_ENV || "LOCAL";
 
 console.log(ENV);
 

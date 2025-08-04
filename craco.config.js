@@ -15,7 +15,18 @@ module.exports = {
     {
       plugin: {
         overrideWebpackConfig: ({ webpackConfig }) => {
-          const envPath = path.resolve(__dirname, "../client_env/.env");
+          // Check for environment variable first
+          let envPath = process.env.ENV_FILE_PATH;
+
+          // If not set, try relative path (for local development)
+          if (!envPath) {
+            envPath = path.resolve(__dirname, "../client_env/.env");
+          }
+
+          // If relative path doesn't exist, try absolute path (for server)
+
+          console.log("Loading environment variables from:", envPath);
+
           webpackConfig.plugins.forEach((plugin) => {
             if (plugin.constructor.name === "DefinePlugin") {
               const dotenv = require("dotenv").config({ path: envPath });

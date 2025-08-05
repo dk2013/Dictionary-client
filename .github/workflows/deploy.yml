@@ -45,5 +45,5 @@ jobs:
         envs: DOMAIN,EMAIL,TRAEFIK_PASSWORD_HASH,PROJECT_DIR
         command_timeout: "30m"
         script: |
-          cd ${{ vars.PROJECT_DIR }}
+          cd $PROJECT_DIR
           ./scripts/deploy.sh 

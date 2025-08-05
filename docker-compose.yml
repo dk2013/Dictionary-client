@@ -31,10 +31,11 @@ services:
       context: .
       dockerfile: Dockerfile.prod
       args:
-        DOMAIN: ${DOMAIN}
-        EMAIL: ${EMAIL}
-        TRAEFIK_PASSWORD_HASH: ${TRAEFIK_PASSWORD_HASH}
-        PROJECT_DIR: ${PROJECT_DIR}
+        REACT_APP_DOMAIN: ${REACT_APP_DOMAIN}
+        REACT_APP_EMAIL: ${REACT_APP_EMAIL}
+        REACT_APP_TRAEFIK_PASSWORD_HASH: ${REACT_APP_TRAEFIK_PASSWORD_HASH}
+        REACT_APP_PROJECT_DIR: ${REACT_APP_PROJECT_DIR}
+        REACT_APP_ENV: ${REACT_APP_ENV}
         NODE_ENV: production
     container_name: dictionary-app
     restart: unless-stopped

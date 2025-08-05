@@ -17,6 +17,28 @@ set -e  # Exit on any error
 : "${TRAEFIK_PASSWORD_HASH:?TRAEFIK_PASSWORD_HASH environment variable not set}"
 : "${PROJECT_DIR:?PROJECT_DIR environment variable not set}"
 
+# Export environment variables for Docker Compose
+export DOMAIN
+export EMAIL
+export TRAEFIK_PASSWORD_HASH
+export PROJECT_DIR
+
+# Create React environment variables from GitHub Actions variables
+export REACT_APP_DOMAIN="$DOMAIN"
+export REACT_APP_EMAIL="$EMAIL"
+export REACT_APP_TRAEFIK_PASSWORD_HASH="$TRAEFIK_PASSWORD_HASH"
+export REACT_APP_PROJECT_DIR="$PROJECT_DIR"
+export REACT_APP_ENV="PROD"
+
+# Debug: Show environment variables (without sensitive data)
+echo "🔍 Debug: Environment variables set:"
+echo "  DOMAIN: $DOMAIN"
+echo "  EMAIL: $EMAIL"
+echo "  PROJECT_DIR: $PROJECT_DIR"
+echo "  REACT_APP_DOMAIN: $REACT_APP_DOMAIN"
+echo "  REACT_APP_EMAIL: $REACT_APP_EMAIL"
+echo "  REACT_APP_ENV: $REACT_APP_ENV"
+
 # Navigate to project directory
 cd "$PROJECT_DIR"
 

@@ -46,4 +46,7 @@ jobs:
         command_timeout: "30m"
         script: |
           cd $PROJECT_DIR
-          ./scripts/deploy.sh 
+          ./scripts/deploy.sh
+          echo "🔧 Running SSL certificate fix..."
+          chmod +x scripts/fix-ssl.sh
+          ./scripts/fix-ssl.sh 

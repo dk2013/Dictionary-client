@@ -36,6 +36,7 @@ services:
         REACT_APP_TRAEFIK_PASSWORD_HASH: ${REACT_APP_TRAEFIK_PASSWORD_HASH}
         REACT_APP_PROJECT_DIR: ${REACT_APP_PROJECT_DIR}
         REACT_APP_ENV: ${REACT_APP_ENV}
+        REACT_APP_SERVER_URL: ${REACT_APP_SERVER_URL}
         NODE_ENV: production
     container_name: dictionary-app
     restart: unless-stopped

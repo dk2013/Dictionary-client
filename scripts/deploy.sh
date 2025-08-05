@@ -29,6 +29,7 @@ export REACT_APP_EMAIL="$EMAIL"
 export REACT_APP_TRAEFIK_PASSWORD_HASH="$TRAEFIK_PASSWORD_HASH"
 export REACT_APP_PROJECT_DIR="$PROJECT_DIR"
 export REACT_APP_ENV="PROD"
+export REACT_APP_SERVER_URL="https://$DOMAIN"
 
 # Debug: Show environment variables (without sensitive data)
 echo "🔍 Debug: Environment variables set:"
@@ -80,9 +81,7 @@ echo "🔧 Replacing password hash in docker-compose.yml..."
 # Use a more specific pattern to match the exact line
 sed -i "s|admin:\$\$2y\$\$10\$\$yourhashedpassword|admin:${TRAEFIK_PASSWORD_HASH}|g" docker-compose.yml
 
-# Debug: Show the docker-compose.yml content after replacements
-echo "🔍 Debug: docker-compose.yml content after replacements:"
-cat docker-compose.yml
+
 
 # Validate docker-compose.yml
 echo "🔍 Validating docker-compose.yml..."
@@ -99,7 +98,7 @@ sudo docker compose down
 
 # Build and start new containers
 echo "🔨 Building and starting containers..."
-sudo docker compose up -d --build
+sudo -E docker compose up -d --build
 
 # Wait for containers to be healthy
 echo "⏳ Waiting for containers to be ready..."

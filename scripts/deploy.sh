@@ -37,16 +37,6 @@ export REACT_APP_PROJECT_DIR="$PROJECT_DIR"
 export REACT_APP_ENV="PROD"
 export REACT_APP_SERVER_URL="https://$DOMAIN"
 
-# Create .env file for Docker Compose
-cat > .env << EOF
-REACT_APP_DOMAIN=$DOMAIN
-REACT_APP_EMAIL=$EMAIL
-REACT_APP_TRAEFIK_PASSWORD_HASH=$TRAEFIK_PASSWORD_HASH
-REACT_APP_PROJECT_DIR=$PROJECT_DIR
-REACT_APP_ENV=PROD
-REACT_APP_SERVER_URL=https://$DOMAIN
-EOF
-
 # Debug: Show environment variables (without sensitive data)
 echo "🔍 Debug: Environment variables set:"
 echo "  DOMAIN: $DOMAIN"
@@ -57,10 +47,22 @@ echo "  REACT_APP_EMAIL: $REACT_APP_EMAIL"
 echo "  REACT_APP_ENV: $REACT_APP_ENV"
 echo "  REACT_APP_SERVER_URL: $REACT_APP_SERVER_URL"
 
-echo "🔍 Debug: .env file created for Docker Compose"
-
 # Navigate to project directory
 cd "$PROJECT_DIR"
+
+# Create .env file for Docker Compose in the project directory
+cat > .env << EOF
+REACT_APP_DOMAIN=$DOMAIN
+REACT_APP_EMAIL=$EMAIL
+REACT_APP_TRAEFIK_PASSWORD_HASH=$TRAEFIK_PASSWORD_HASH
+REACT_APP_PROJECT_DIR=$PROJECT_DIR
+REACT_APP_ENV=PROD
+REACT_APP_SERVER_URL=https://$DOMAIN
+EOF
+
+echo "🔍 Debug: .env file created for Docker Compose"
+echo "🔍 Debug: .env file contents:"
+cat .env
 
 echo "📁 Working directory: $(pwd)"
 

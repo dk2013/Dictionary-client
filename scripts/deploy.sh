@@ -12,6 +12,12 @@
 set -e  # Exit on any error
 
 # Check required environment variables
+echo "🔍 Debug: Checking environment variables..."
+echo "  DOMAIN: ${DOMAIN:-NOT_SET}"
+echo "  EMAIL: ${EMAIL:-NOT_SET}"
+echo "  TRAEFIK_PASSWORD_HASH: ${TRAEFIK_PASSWORD_HASH:-NOT_SET}"
+echo "  PROJECT_DIR: ${PROJECT_DIR:-NOT_SET}"
+
 : "${DOMAIN:?DOMAIN environment variable not set}"
 : "${EMAIL:?EMAIL environment variable not set}"
 : "${TRAEFIK_PASSWORD_HASH:?TRAEFIK_PASSWORD_HASH environment variable not set}"
@@ -39,6 +45,7 @@ echo "  PROJECT_DIR: $PROJECT_DIR"
 echo "  REACT_APP_DOMAIN: $REACT_APP_DOMAIN"
 echo "  REACT_APP_EMAIL: $REACT_APP_EMAIL"
 echo "  REACT_APP_ENV: $REACT_APP_ENV"
+echo "  REACT_APP_SERVER_URL: $REACT_APP_SERVER_URL"
 
 # Navigate to project directory
 cd "$PROJECT_DIR"

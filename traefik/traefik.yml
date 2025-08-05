@@ -27,6 +27,8 @@ certificatesResolvers:
       storage: acme.json
       httpChallenge:
         entryPoint: web
+      # Add logging for certificate generation
+      caServer: https://acme-v02.api.letsencrypt.org/directory
 
 log:
   level: INFO

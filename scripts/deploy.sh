@@ -12,12 +12,6 @@
 set -e  # Exit on any error
 
 # Check required environment variables
-echo "🔍 Debug: Checking environment variables..."
-echo "  DOMAIN: ${DOMAIN:-NOT_SET}"
-echo "  EMAIL: ${EMAIL:-NOT_SET}"
-echo "  TRAEFIK_PASSWORD_HASH: ${TRAEFIK_PASSWORD_HASH:-NOT_SET}"
-echo "  PROJECT_DIR: ${PROJECT_DIR:-NOT_SET}"
-
 : "${DOMAIN:?DOMAIN environment variable not set}"
 : "${EMAIL:?EMAIL environment variable not set}"
 : "${TRAEFIK_PASSWORD_HASH:?TRAEFIK_PASSWORD_HASH environment variable not set}"
@@ -37,15 +31,7 @@ export REACT_APP_PROJECT_DIR="$PROJECT_DIR"
 export REACT_APP_ENV="PROD"
 export REACT_APP_SERVER_URL="https://$DOMAIN"
 
-# Debug: Show environment variables (without sensitive data)
-echo "🔍 Debug: Environment variables set:"
-echo "  DOMAIN: $DOMAIN"
-echo "  EMAIL: $EMAIL"
-echo "  PROJECT_DIR: $PROJECT_DIR"
-echo "  REACT_APP_DOMAIN: $REACT_APP_DOMAIN"
-echo "  REACT_APP_EMAIL: $REACT_APP_EMAIL"
-echo "  REACT_APP_ENV: $REACT_APP_ENV"
-echo "  REACT_APP_SERVER_URL: $REACT_APP_SERVER_URL"
+
 
 # Navigate to project directory
 cd "$PROJECT_DIR"
@@ -60,9 +46,7 @@ REACT_APP_ENV=PROD
 REACT_APP_SERVER_URL=https://$DOMAIN
 EOF
 
-echo "🔍 Debug: .env file created for Docker Compose"
-echo "🔍 Debug: .env file contents:"
-cat .env
+
 
 echo "📁 Working directory: $(pwd)"
 
@@ -99,14 +83,11 @@ sed -i "s/YOUR-EMAIL@example.com/$EMAIL/g" traefik/traefik.yml
 
 # Replace password hash in docker-compose.yml
 echo "🔧 Replacing password hash in docker-compose.yml..."
-# Use a more specific pattern to match the exact line
 sed -i "s|admin:\$\$2y\$\$10\$\$yourhashedpassword|admin:${TRAEFIK_PASSWORD_HASH}|g" docker-compose.yml
 
 
 
-# Validate docker-compose.yml
-echo "🔍 Validating docker-compose.yml..."
-sudo docker compose config
+
 
 # Force stop and remove all containers (if any are running)
 echo "🧹 Force stopping and removing all Docker containers..."
